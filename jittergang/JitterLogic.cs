@@ -199,6 +199,10 @@ namespace jittergang
                 toggleKeyPressed = false;
             }
 
+            if (!jitterEnabled) {
+                return;
+            }
+
 
             bool shouldApplyJitter = false;
             try
