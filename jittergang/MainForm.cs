@@ -53,8 +53,9 @@ namespace jittergang
             // comboBoxProcesses
             // 
             comboBoxProcesses.BackColor = Color.FromArgb(33, 33, 33);
+            comboBoxProcesses.Font = new Font("Segoe UI", 11F);
             comboBoxProcesses.ForeColor = Color.White;
-            comboBoxProcesses.Location = new Point(64, 48);
+            comboBoxProcesses.Location = new Point(63, 37);
             comboBoxProcesses.Name = "comboBoxProcesses";
             comboBoxProcesses.Size = new Size(199, 28);
             comboBoxProcesses.TabIndex = 0;
@@ -64,8 +65,9 @@ namespace jittergang
             // numericUpDownStrength
             // 
             numericUpDownStrength.BackColor = Color.FromArgb(33, 33, 33);
+            numericUpDownStrength.Font = new Font("Segoe UI", 11F);
             numericUpDownStrength.ForeColor = Color.White;
-            numericUpDownStrength.Location = new Point(103, 97);
+            numericUpDownStrength.Location = new Point(102, 97);
             numericUpDownStrength.Name = "numericUpDownStrength";
             numericUpDownStrength.Size = new Size(120, 27);
             numericUpDownStrength.TabIndex = 1;
@@ -73,8 +75,9 @@ namespace jittergang
             // numericUpDownDelay
             // 
             numericUpDownDelay.BackColor = Color.FromArgb(33, 33, 33);
+            numericUpDownDelay.Font = new Font("Segoe UI", 11F);
             numericUpDownDelay.ForeColor = Color.White;
-            numericUpDownDelay.Location = new Point(103, 147);
+            numericUpDownDelay.Location = new Point(102, 156);
             numericUpDownDelay.Name = "numericUpDownDelay";
             numericUpDownDelay.Size = new Size(120, 27);
             numericUpDownDelay.TabIndex = 2;
@@ -82,9 +85,9 @@ namespace jittergang
             // buttonStart
             // 
             buttonStart.FlatAppearance.BorderSize = 0;
-            buttonStart.Location = new Point(64, 360);
+            buttonStart.Location = new Point(63, 379);
             buttonStart.Name = "buttonStart";
-            buttonStart.Size = new Size(75, 23);
+            buttonStart.Size = new Size(74, 26);
             buttonStart.TabIndex = 4;
             buttonStart.Text = "Start";
             buttonStart.Click += buttonStart_Click;
@@ -92,9 +95,9 @@ namespace jittergang
             // buttonStop
             // 
             buttonStop.FlatAppearance.BorderSize = 0;
-            buttonStop.Location = new Point(188, 364);
+            buttonStop.Location = new Point(187, 379);
             buttonStop.Name = "buttonStop";
-            buttonStop.Size = new Size(75, 23);
+            buttonStop.Size = new Size(75, 26);
             buttonStop.TabIndex = 5;
             buttonStop.Text = "Stop";
             buttonStop.Click += buttonStop_Click;
@@ -102,8 +105,9 @@ namespace jittergang
             // comboBoxToggleKey
             // 
             comboBoxToggleKey.BackColor = Color.FromArgb(33, 33, 33);
+            comboBoxToggleKey.Font = new Font("Segoe UI", 11F);
             comboBoxToggleKey.ForeColor = Color.White;
-            comboBoxToggleKey.Location = new Point(103, 257);
+            comboBoxToggleKey.Location = new Point(102, 274);
             comboBoxToggleKey.Name = "comboBoxToggleKey";
             comboBoxToggleKey.Size = new Size(120, 28);
             comboBoxToggleKey.TabIndex = 9;
@@ -112,7 +116,7 @@ namespace jittergang
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(139, 21);
+            label1.Location = new Point(133, 11);
             label1.Name = "label1";
             label1.Size = new Size(58, 20);
             label1.TabIndex = 10;
@@ -121,7 +125,7 @@ namespace jittergang
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(136, 74);
+            label2.Location = new Point(130, 71);
             label2.Name = "label2";
             label2.Size = new Size(65, 20);
             label2.TabIndex = 11;
@@ -130,7 +134,7 @@ namespace jittergang
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(145, 124);
+            label3.Location = new Point(139, 130);
             label3.Name = "label3";
             label3.Size = new Size(47, 20);
             label3.TabIndex = 12;
@@ -139,7 +143,7 @@ namespace jittergang
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(124, 239);
+            label4.Location = new Point(115, 248);
             label4.Name = "label4";
             label4.Size = new Size(95, 20);
             label4.TabIndex = 13;
@@ -150,7 +154,7 @@ namespace jittergang
             linkLabel1.AutoSize = true;
             linkLabel1.LinkBehavior = LinkBehavior.HoverUnderline;
             linkLabel1.LinkColor = Color.WhiteSmoke;
-            linkLabel1.Location = new Point(121, 406);
+            linkLabel1.Location = new Point(112, 435);
             linkLabel1.Name = "linkLabel1";
             linkLabel1.Size = new Size(105, 20);
             linkLabel1.TabIndex = 14;
@@ -161,7 +165,7 @@ namespace jittergang
             // 
             checkBox2.AutoSize = true;
             checkBox2.ForeColor = Color.White;
-            checkBox2.Location = new Point(115, 290);
+            checkBox2.Location = new Point(114, 308);
             checkBox2.Name = "checkBox2";
             checkBox2.Size = new Size(96, 24);
             checkBox2.TabIndex = 16;
@@ -173,7 +177,7 @@ namespace jittergang
             // 
             checkBox1.AutoSize = true;
             checkBox1.ForeColor = Color.White;
-            checkBox1.Location = new Point(115, 315);
+            checkBox1.Location = new Point(112, 338);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(100, 24);
             checkBox1.TabIndex = 17;
@@ -184,7 +188,7 @@ namespace jittergang
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(133, 184);
+            label5.Location = new Point(127, 189);
             label5.Name = "label5";
             label5.Size = new Size(70, 20);
             label5.TabIndex = 19;
@@ -193,8 +197,9 @@ namespace jittergang
             // numericUpDownPullDownStrength
             // 
             numericUpDownPullDownStrength.BackColor = Color.FromArgb(33, 33, 33);
+            numericUpDownPullDownStrength.Font = new Font("Segoe UI", 11F);
             numericUpDownPullDownStrength.ForeColor = Color.White;
-            numericUpDownPullDownStrength.Location = new Point(103, 202);
+            numericUpDownPullDownStrength.Location = new Point(102, 215);
             numericUpDownPullDownStrength.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             numericUpDownPullDownStrength.Name = "numericUpDownPullDownStrength";
             numericUpDownPullDownStrength.Size = new Size(120, 27);
@@ -206,7 +211,7 @@ namespace jittergang
             AutoScaleMode = AutoScaleMode.None;
             AutoScroll = true;
             BackColor = Color.FromArgb(33, 33, 33);
-            ClientSize = new Size(318, 435);
+            ClientSize = new Size(318, 464);
             Controls.Add(numericUpDownPullDownStrength);
             Controls.Add(label5);
             Controls.Add(checkBox1);
@@ -222,6 +227,7 @@ namespace jittergang
             Controls.Add(buttonStart);
             Controls.Add(buttonStop);
             Controls.Add(comboBoxToggleKey);
+            Font = new Font("Segoe UI", 11F);
             ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
