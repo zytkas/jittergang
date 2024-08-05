@@ -1,25 +1,27 @@
-﻿using System.Runtime.InteropServices;
+﻿// Win32Structures.cs
+using System;
+using System.Runtime.InteropServices;
 
-namespace jittergang.Win32
+namespace JitterGang.Win32
 {
     public static class NativeMethods
     {
-        [DllImport("user32.dll")]
+        [DllImport("user32.dll", SetLastError = true)]
         public static extern uint SendInput(uint nInputs, INPUT[] pInputs, int cbSize);
 
-        [DllImport("user32.dll")]
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool GetCursorPos(out POINT lpPoint);
 
-        [DllImport("user32.dll")]
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
 
         [DllImport("user32.dll", SetLastError = true)]
         public static extern IntPtr GetForegroundWindow();
 
-        [DllImport("user32.dll")]
+        [DllImport("user32.dll", SetLastError = true)]
         public static extern short GetAsyncKeyState(int vKey);
-
-
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -41,21 +43,20 @@ namespace jittergang.Win32
     [StructLayout(LayoutKind.Sequential)]
     public struct INPUT
     {
-        public uint type;
-        public MOUSEINPUT mi;
+        public uint Type;
+        public MOUSEINPUT Mi;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     public struct MOUSEINPUT
     {
-        public int dx;
-        public int dy;
-        public uint mouseData;
-        public uint dwFlags;
-        public uint time;
-        public IntPtr dwExtraInfo;
+        public int Dx;
+        public int Dy;
+        public uint MouseData;
+        public uint DwFlags;
+        public uint Time;
+        public IntPtr DwExtraInfo;
     }
-
 
     public static class Win32Constants
     {

@@ -2,8 +2,7 @@
 using SharpDX.XInput;
 using DirectInputDeviceType = SharpDX.DirectInput.DeviceType;
 
-
-namespace jittergang
+namespace JitterGang
 {
     public static class ControllerDetector
     {
@@ -28,14 +27,14 @@ namespace jittergang
                 return new DirectInputHandler(deviceInstance.InstanceGuid);
             }
 
-            throw new Exception("No compatible controller found.");
+            throw new InvalidOperationException("No compatible controller found.");
         }
     }
 
     public abstract class ControllerHandler : IDisposable
     {
-        protected Thread? pollingThread;
-        protected bool isRunning = false;
+        protected Task pollingTask;
+        protected bool isRunning;
 
         public bool IsButtonPressed { get; protected set; }
 
@@ -44,17 +43,15 @@ namespace jittergang
         public abstract void Dispose();
     }
 
-
-public class DirectInputHandler : ControllerHandler
+    public class DirectInputHandler : ControllerHandler
     {
-        private DirectInput directInput;
+        private readonly DirectInput directInput;
         private Joystick joystick;
         private readonly Guid joystickGuid;
-        private const int ReconnectionDelay = 1000; // 1 second delay for reconnection attempts
+        private const int ReconnectionDelayMs = 1000;
 
         public DirectInputHandler(Guid joystickGuid)
         {
-             
             this.joystickGuid = joystickGuid;
             directInput = new DirectInput();
             InitializeJoystick();
@@ -80,18 +77,17 @@ public class DirectInputHandler : ControllerHandler
             if (!isRunning)
             {
                 isRunning = true;
-                pollingThread = new Thread(PollingLoop);
-                pollingThread.Start();
+                pollingTask = Task.Run(PollingLoopAsync);
             }
         }
 
         public override void StopPolling()
         {
             isRunning = false;
-            pollingThread?.Join();
+            pollingTask?.Wait();
         }
 
-        private void PollingLoop()
+        private async Task PollingLoopAsync()
         {
             while (isRunning)
             {
@@ -100,20 +96,20 @@ public class DirectInputHandler : ControllerHandler
                     if (joystick != null && IsJoystickConnected())
                     {
                         var state = joystick.GetCurrentState();
-                        IsButtonPressed = state.Buttons[7]; // RT 5, RT BUMPER 7
+                        IsButtonPressed = state.Buttons[7];
                     }
                     else
                     {
                         Console.WriteLine("DirectInput controller disconnected. Waiting for reconnection...");
                         InitializeJoystick();
-                        Thread.Sleep(ReconnectionDelay); 
+                        await Task.Delay(ReconnectionDelayMs);
                     }
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Error polling DirectInput controller: {ex.Message}");
-                    joystick = null; 
-                    Thread.Sleep(ReconnectionDelay); 
+                    joystick = null;
+                    await Task.Delay(ReconnectionDelayMs);
                 }
             }
         }
@@ -142,9 +138,9 @@ public class DirectInputHandler : ControllerHandler
 
     public class XInputHandler : ControllerHandler
     {
-        private Controller controller;
+        private readonly Controller controller;
         private const float TriggerThreshold = 0.5f;
-        private const int ReconnectionDelay = 1000; // 1 second delay for reconnection attempts
+        private const int ReconnectionDelayMs = 1000;
 
         public XInputHandler(UserIndex userIndex)
         {
@@ -160,18 +156,17 @@ public class DirectInputHandler : ControllerHandler
             if (!isRunning)
             {
                 isRunning = true;
-                pollingThread = new Thread(PollingLoop);
-                pollingThread.Start();
+                pollingTask = Task.Run(PollingLoopAsync);
             }
         }
 
         public override void StopPolling()
         {
             isRunning = false;
-            pollingThread?.Join();
+            pollingTask?.Wait();
         }
 
-        private void PollingLoop()
+        private async Task PollingLoopAsync()
         {
             while (isRunning)
             {
@@ -185,13 +180,13 @@ public class DirectInputHandler : ControllerHandler
                     else
                     {
                         Console.WriteLine("Controller disconnected. Waiting for reconnection...");
-                        Thread.Sleep(ReconnectionDelay);
+                        await Task.Delay(ReconnectionDelayMs);
                     }
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Error polling XInput controller: {ex.Message}");
-                    Thread.Sleep(ReconnectionDelay); 
+                    await Task.Delay(ReconnectionDelayMs);
                 }
             }
         }

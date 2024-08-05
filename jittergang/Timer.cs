@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 
-namespace jittergang
+
+namespace JitterGang
 {
     public class HighPrecisionTimer : IDisposable
     {
@@ -26,7 +27,7 @@ namespace jittergang
             }
 
             _stopwatch.Start();
-            _timerTask = Task.Run(TimerLoop, _cts.Token);
+            _timerTask = Task.Run(TimerLoopAsync, _cts.Token);
         }
 
         public void Stop()
@@ -38,12 +39,7 @@ namespace jittergang
             }
             catch (AggregateException ae)
             {
-
-                if (ae.InnerExceptions.All(e => e is TaskCanceledException))
-                {
-
-                }
-                else
+                if (!ae.InnerExceptions.All(e => e is TaskCanceledException))
                 {
                     throw;
                 }
@@ -51,7 +47,7 @@ namespace jittergang
             _stopwatch.Stop();
         }
 
-        private async Task TimerLoop()
+        private async Task TimerLoopAsync()
         {
             long nextTick = _stopwatch.ElapsedTicks;
 
@@ -106,9 +102,12 @@ namespace jittergang
 
         public void Stop()
         {
-            _timer?.Stop();
-            _timer?.Dispose();
-            _timer = null;
+            if (_timer != null)
+            {
+                _timer.Stop();
+                _timer.Dispose();
+                _timer = null;
+            }
         }
 
         public bool IsRunning => _timer != null;

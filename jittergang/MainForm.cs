@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using JitterGang;
+using System.Diagnostics;
 
 namespace jittergang
 {
