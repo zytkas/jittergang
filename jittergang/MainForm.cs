@@ -377,7 +377,7 @@ namespace jittergang
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            jitterLogic.SetJitterType(checkBox2.Checked ? "circle" : "leftright");
+            jitterLogic.IsCircleJitterActive = checkBox2.Checked;
         }
 
         private CheckBox checkBox1;

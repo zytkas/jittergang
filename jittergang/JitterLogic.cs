@@ -9,11 +9,14 @@ namespace JitterGang
         public abstract void ApplyJitter(ref INPUT input);
     }
 
+
     public class LeftRightJitter : BaseJitter
     {
         private readonly int strength;
-        private double currentPosition;
-        private const double FrequencyMultiplier = 16;
+        private int currentDirection = 1;
+        private int moveCount = 0;
+        private const int MovesPerDirection = 10; // Увеличено количество движений в одном направлении
+        private const int MicroStrength = 1; // Минимальное смещение за одно движение
 
         public LeftRightJitter(int strength)
         {
@@ -22,16 +25,14 @@ namespace JitterGang
 
         public override void ApplyJitter(ref INPUT input)
         {
-            var oscillation = Math.Sin(currentPosition);
-            var jitterAmount = (int)(oscillation * strength);
+            int microMove = Math.Min(MicroStrength, strength);
+            input.Mi.Dx += microMove * currentDirection;
 
-            input.Mi.Dx += jitterAmount;
-
-            currentPosition += FrequencyMultiplier;
-
-            if (currentPosition >= 2 * Math.PI)
+            moveCount++;
+            if (moveCount >= MovesPerDirection)
             {
-                currentPosition -= 2 * Math.PI;
+                currentDirection *= -1;
+                moveCount = 0;
             }
         }
     }
@@ -60,18 +61,56 @@ namespace JitterGang
         }
     }
 
-    public class PullDownJitter : BaseJitter
+    public class SmoothLeftRightJitter : BaseJitter
     {
-        private int strength;
+        private readonly int strength;
+        private double angle;
+        private const double FrequencyMultiplier = 32.0; 
+        private const double AngleIncrement = 0.05; 
 
-        public PullDownJitter(int strength)
+        public SmoothLeftRightJitter(int strength)
         {
             this.strength = strength;
+            this.angle = 0;
         }
 
         public override void ApplyJitter(ref INPUT input)
         {
-            input.Mi.Dy += strength;
+            double movement = Math.Sin(angle) * strength;
+            input.Mi.Dx += (int)Math.Round(movement);
+
+            angle += AngleIncrement * FrequencyMultiplier;
+            if (angle >= 2 * Math.PI)
+            {
+                angle -= 2 * Math.PI;
+            }
+        }
+    }
+
+
+    public class PullDownJitter : BaseJitter
+    {
+        private int strength;
+        private int accumulatedStrength;
+
+        public PullDownJitter(int strength)
+        {
+            this.strength = strength;
+            this.accumulatedStrength = 0;
+        }
+
+        public override void ApplyJitter(ref INPUT input)
+        {
+            float weakenedStrength = strength / 8.0f;
+
+            accumulatedStrength += (int)(weakenedStrength * 100);
+
+            if (accumulatedStrength >= 100)
+            {
+                int pixelsToMove = accumulatedStrength / 100;
+                input.Mi.Dy += pixelsToMove;
+                accumulatedStrength %= 100;
+            }
         }
 
         public void UpdateStrength(int newStrength)
@@ -87,14 +126,16 @@ namespace JitterGang
         private bool toggleKeyPressed;
         private Process selectedProcess;
 
-        private BaseJitter activeJitter;
+        private LeftRightJitter leftRightJitter;
+        private SmoothLeftRightJitter smoothLeftRightJitter;
+        private CircleJitter circleJitter;
         private PullDownJitter pullDownJitter;
 
         public int Strength { get; private set; }
         public int PullDownStrength { get; private set; }
-        public string JitterType { get; private set; }
         public bool UseController { get; private set; }
-
+        public bool IsCircleJitterActive { get; set; }
+        
         private ControllerHandler controllerHandler;
 
         public int ToggleKey
@@ -111,8 +152,8 @@ namespace JitterGang
         {
             Strength = 0;
             PullDownStrength = 0;
-            JitterType = "leftright";
             UseController = false;
+            IsCircleJitterActive = false;
             UpdateJitters();
         }
 
@@ -136,23 +177,10 @@ namespace JitterGang
 
         public void UpdateJitters()
         {
-            activeJitter = JitterType.ToLower() switch
-            {
-                "leftright" => new LeftRightJitter(Strength),
-                "circle" => new CircleJitter(Strength),
-                _ => throw new ArgumentException("Unknown jitter type", nameof(JitterType)),
-            };
+            leftRightJitter = new LeftRightJitter(Strength);
+            smoothLeftRightJitter = new SmoothLeftRightJitter(Strength);
+            circleJitter = new CircleJitter(Strength);
             pullDownJitter = new PullDownJitter(PullDownStrength);
-        }
-
-        public void SetJitterType(string type)
-        {
-            if (type.ToLower() is not "leftright" and not "circle")
-            {
-                throw new ArgumentException("Invalid jitter type. Use 'leftright' or 'circle'.", nameof(type));
-            }
-            JitterType = type.ToLower();
-            UpdateJitters();
         }
 
         public void StartJitter() => jitterEnabled = true;
@@ -192,27 +220,39 @@ namespace JitterGang
 
             if (shouldApplyJitter)
             {
-                NativeMethods.GetWindowRect(selectedProcess.MainWindowHandle, out var windowRect);
-                NativeMethods.GetCursorPos(out var currentPos);
-
-                if (IsCursorInWindow(currentPos, windowRect))
+                for (int i = 0; i < 5; i++)
                 {
                     var inputs = new INPUT[1];
                     inputs[0].Type = Win32Constants.INPUT_MOUSE;
                     inputs[0].Mi.DwFlags = Win32Constants.MOUSEEVENTF_MOVE;
 
-                    activeJitter.ApplyJitter(ref inputs[0]);
+
+                    leftRightJitter.ApplyJitter(ref inputs[0]);
+
+                    if (UseController)
+                    {
+                        smoothLeftRightJitter.ApplyJitter(ref inputs[0]);
+                    }
+
+
+                    if (IsCircleJitterActive)
+                    {
+                        circleJitter.ApplyJitter(ref inputs[0]);
+                    }
+
+
                     pullDownJitter.ApplyJitter(ref inputs[0]);
 
                     var result = NativeMethods.SendInput(1, inputs, Marshal.SizeOf(typeof(INPUT)));
                     if (result != 1)
                     {
                         var error = Marshal.GetLastWin32Error();
-                        // Handle error if needed
                     }
                 }
             }
         }
+        
+    
 
         private static bool IsCursorInWindow(POINT cursorPos, RECT windowRect)
         {
