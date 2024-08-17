@@ -1,5 +1,10 @@
 ﻿using JitterGang;
+using System.Configuration;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Security.AccessControl;
+using System.Security.Principal;
+
 
 namespace jittergang
 {
@@ -7,21 +12,33 @@ namespace jittergang
     {
         private JitterLogic jitterLogic;
         private JitterTimer jitterTimer;
-
         private bool isProcessListInitialized = false;
         private System.ComponentModel.IContainer components;
+        private string settingsFilePath;
 
-        // Placeholder for form elements
+        // Form elements
         private ComboBox comboBoxProcesses;
         private NumericUpDown numericUpDownStrength;
         private NumericUpDown numericUpDownDelay;
+        private NumericUpDown numericUpDownPullDownStrength;
         private Button buttonStart;
         private Button buttonStop;
         private ComboBox comboBoxToggleKey;
+        private CheckBox checkBox2;
+        private CheckBox checkBox1;
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private Label label4;
+        private Label label5;
+        private LinkLabel linkLabel1;
+        private ToolTip toolTip1;
+
 
         public MainForm()
         {
             InitializeComponent();
+            InitializeSettingsPath();
             jitterLogic = new JitterLogic();
             jitterTimer = new JitterTimer(jitterLogic);
         }
@@ -246,49 +263,10 @@ namespace jittergang
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            InitializeComboBoxes();
+            LoadSettings();
             UpdateProcessList();
-
             isProcessListInitialized = true;
-            comboBoxToggleKey.Items.AddRange(new object[]
-            {
-                "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12",
-                "X1", "X2", "Shift"
-            });
-
-            comboBoxToggleKey.SelectedIndex = 0;
-        }
-
-        private void ComboBoxProcesses_DropDown(object sender, EventArgs e)
-        {
-            if (isProcessListInitialized)
-            {
-                UpdateProcessList();
-            }
-        }
-
-        private void UpdateProcessList()
-        {
-            var currentSelection = comboBoxProcesses.SelectedItem;
-
-            var processes = Process.GetProcesses()
-                .Select(p => p.ProcessName)
-                .Distinct()
-                .OrderBy(name => name)
-                .ToList();
-
-            comboBoxProcesses.BeginUpdate();
-            comboBoxProcesses.Items.Clear();
-            comboBoxProcesses.Items.AddRange(processes.Cast<object>().ToArray());
-            comboBoxProcesses.EndUpdate();
-
-            if (currentSelection != null && processes.Contains(currentSelection.ToString()))
-            {
-                comboBoxProcesses.SelectedItem = currentSelection;
-            }
-            else if (comboBoxProcesses.Items.Count > 0)
-            {
-                comboBoxProcesses.SelectedIndex = 0;
-            }
         }
 
 
@@ -315,72 +293,127 @@ namespace jittergang
             }
         }
 
+        private void buttonStop_Click(object sender, EventArgs e)
+                {
+                    if (jitterTimer.IsRunning)
+                    {
+                        jitterTimer.Stop();
+                        buttonStart.Enabled = true;
+                        buttonStop.Enabled = false;
+                        jitterLogic.StopJitter();
+                    }
+                }
+
+
+
         private void numericUpDownStrength_ValueChanged(object sender, EventArgs e)
         {
             jitterLogic.UpdateStrength((int)numericUpDownStrength.Value);
             jitterLogic.UpdateJitters();
+            SaveSettings();
         }
 
-
-        private void buttonStop_Click(object sender, EventArgs e)
+        private void numericUpDownPullDownStrength_ValueChanged(object sender, EventArgs e)
         {
-            if (jitterTimer.IsRunning)
-            {
-                jitterTimer.Stop();
-                buttonStart.Enabled = true;
-                buttonStop.Enabled = false;
-                jitterLogic.StopJitter();
-            }
+                jitterLogic.UpdatePullDownStrength((int)numericUpDownPullDownStrength.Value);
+                jitterLogic.UpdateJitters();
+                SaveSettings();
         }
+
+        
 
         private void comboBoxProcesses_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selectedProcessName = comboBoxProcesses.SelectedItem.ToString();
-            jitterLogic.SelectedProcess = Process.GetProcessesByName(selectedProcessName).FirstOrDefault();
+            if (comboBoxProcesses.SelectedItem != null)
+            {
+                string selectedProcessName = comboBoxProcesses.SelectedItem.ToString();
+                jitterLogic.SelectedProcess = Process.GetProcessesByName(selectedProcessName).FirstOrDefault();
+                SaveSettings();
+            }
+        }
+
+        private void ComboBoxProcesses_DropDown(object sender, EventArgs e)
+        {
+         if (isProcessListInitialized)
+            {
+                UpdateProcessList();
+            }
+        }
+
+        private void UpdateProcessList()
+        {
+            var currentSelection = comboBoxProcesses.SelectedItem?.ToString();
+
+            var processes = Process.GetProcesses()
+                .Select(p => p.ProcessName)
+                .Distinct()
+                .OrderBy(name => name)
+                .ToList();
+
+            comboBoxProcesses.BeginUpdate();
+            comboBoxProcesses.Items.Clear();
+            comboBoxProcesses.Items.AddRange(processes.Cast<object>().ToArray());
+            comboBoxProcesses.EndUpdate();
+
+            if (!string.IsNullOrEmpty(currentSelection))
+            {
+                int index = comboBoxProcesses.FindStringExact(currentSelection);
+                if (index != -1)
+                {
+                    comboBoxProcesses.SelectedIndex = index;
+                }
+                else if (comboBoxProcesses.Items.Count > 0)
+                {
+                    comboBoxProcesses.SelectedIndex = 0;
+                }
+            }
+            else if (comboBoxProcesses.Items.Count > 0)
+            {
+                comboBoxProcesses.SelectedIndex = 0;
+            }
         }
 
 
         private void comboBoxToggleKey_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selectedKey = comboBoxToggleKey.SelectedItem.ToString();
-            switch (selectedKey)
+            if (comboBoxToggleKey.SelectedItem != null)
             {
-                case "F1": jitterLogic.ToggleKey = 0x70; break;
-                case "F2": jitterLogic.ToggleKey = 0x71; break;
-                case "F3": jitterLogic.ToggleKey = 0x72; break;
-                case "F4": jitterLogic.ToggleKey = 0x73; break;
-                case "F5": jitterLogic.ToggleKey = 0x74; break;
-                case "F6": jitterLogic.ToggleKey = 0x75; break;
-                case "F7": jitterLogic.ToggleKey = 0x76; break;
-                case "F8": jitterLogic.ToggleKey = 0x77; break;
-                case "F9": jitterLogic.ToggleKey = 0x78; break;
-                case "F10": jitterLogic.ToggleKey = 0x79; break;
-                case "F11": jitterLogic.ToggleKey = 0x7A; break;
-                case "F12": jitterLogic.ToggleKey = 0x7B; break;
-                case "Shift": jitterLogic.ToggleKey = 0x10; break;
-                case "X1": jitterLogic.ToggleKey = 0x05; break;
-                case "X2": jitterLogic.ToggleKey = 0x06; break;
-                default: jitterLogic.ToggleKey = 0x70; break;
+                string selectedKey = comboBoxToggleKey.SelectedItem.ToString();
+                SetToggleKey(selectedKey);
+                SaveSettings();
             }
         }
 
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Label label4;
-        private LinkLabel linkLabel1;
+        private void SetToggleKey(string keyName)
+        {
+            switch (keyName)
+            {                    
+                    case "F1": jitterLogic.ToggleKey = 0x70; break;
+                    case "F2": jitterLogic.ToggleKey = 0x71; break;
+                    case "F3": jitterLogic.ToggleKey = 0x72; break;
+                    case "F4": jitterLogic.ToggleKey = 0x73; break;
+                    case "F5": jitterLogic.ToggleKey = 0x74; break;
+                    case "F6": jitterLogic.ToggleKey = 0x75; break;
+                    case "F7": jitterLogic.ToggleKey = 0x76; break;
+                    case "F8": jitterLogic.ToggleKey = 0x77; break;
+                    case "F9": jitterLogic.ToggleKey = 0x78; break;
+                    case "F10": jitterLogic.ToggleKey = 0x79; break;
+                    case "F11": jitterLogic.ToggleKey = 0x7A; break;
+                    case "F12": jitterLogic.ToggleKey = 0x7B; break;
+                    case "Shift": jitterLogic.ToggleKey = 0x10; break;
+                    case "X1": jitterLogic.ToggleKey = 0x05; break;
+                    case "X2": jitterLogic.ToggleKey = 0x06; break;
+                    default: jitterLogic.ToggleKey = 0x70; break;
+            }
+        }
 
-
-
-        private ToolTip toolTip1;
-        private CheckBox checkBox2;
+  
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             jitterLogic.IsCircleJitterActive = checkBox2.Checked;
         }
 
-        private CheckBox checkBox1;
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
@@ -395,57 +428,195 @@ namespace jittergang
             }
         }
 
+
         private void ValidateParameters()
         {
-            if (numericUpDownStrength.Value == 0)
+            if (numericUpDownStrength.Value < 1)
             {
-                throw new ArgumentException("Strength should be positive.");
+                numericUpDownStrength.Value = 1;
             }
-
-            if (numericUpDownDelay.Value == 0)
+            if (numericUpDownDelay.Value < 1)
             {
-                throw new ArgumentException("Delay should be positive.");
+                numericUpDownDelay.Value = 1;
             }
-
-            if (comboBoxProcesses.SelectedItem == null)
+            if (comboBoxProcesses.SelectedItem == null && comboBoxProcesses.Items.Count > 0)
             {
-                throw new ArgumentException("Process is not choosed");
+                comboBoxProcesses.SelectedIndex = 0;
             }
-
             if (numericUpDownStrength.Value == 0 && numericUpDownPullDownStrength.Value == 0)
             {
-                throw new ArgumentException("Both Strength and PullDown Strength cannot be zero.");
+                numericUpDownStrength.Value = 1;
             }
-
-            string selectedProcessName = comboBoxProcesses.SelectedItem.ToString();
-            if (string.IsNullOrWhiteSpace(selectedProcessName))
+            if (comboBoxProcesses.SelectedItem != null)
             {
-                throw new ArgumentException("Cannot handle this process.");
+                string selectedProcessName = comboBoxProcesses.SelectedItem.ToString();
+                if (string.IsNullOrWhiteSpace(selectedProcessName))
+                {
+                    throw new ArgumentException("Cannot handle this process.");
+                }
+                // Убираем проверку на существование процесса, так как он может быть placeholder
             }
-
-            Process selectedProcess = Process.GetProcessesByName(selectedProcessName).FirstOrDefault();
-            if (selectedProcess == null)
-            {
-                throw new ArgumentException($"Choosen proccess '{selectedProcessName}' is not found.");
-            }
-
         }
-        private Label label5;
 
-        private void numericUpDownPullDownStrength_ValueChanged(object sender, EventArgs e)
+        private void InitializeComboBoxes()
         {
-            jitterLogic.UpdatePullDownStrength((int)numericUpDownPullDownStrength.Value);
-            jitterLogic.UpdateJitters();
+            comboBoxToggleKey.Items.Clear();
+            comboBoxToggleKey.Items.AddRange(new object[]
+            {
+        "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12",
+        "X1", "X2", "Shift"
+            });
         }
 
+        private void InitializeSettingsPath()
+        {
+            string baseFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            string appFolder = Path.Combine(baseFolder, "JitterGang");
+
+            if (!Directory.Exists(appFolder))
+            {
+                Directory.CreateDirectory(appFolder);
+            }
+
+            settingsFilePath = Path.Combine(appFolder, "settings.json");
+            EnsureFileAccess(settingsFilePath);
+
+            Debug.WriteLine($"Путь к файлу настроек: {settingsFilePath}");
+        }
+
+        private void EnsureFileAccess(string filePath)
+        {
+            if (!File.Exists(filePath))
+            {
+                using (File.Create(filePath)) { }
+            }
+
+            SetWindowsFilePermissions(filePath);
+        }
+
+        [DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        static extern bool ConvertStringSecurityDescriptorToSecurityDescriptor(string StringSecurityDescriptor, uint StringSDRevision, ref byte[] SecurityDescriptor, out uint SecurityDescriptorSize);
+
+        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        static extern bool SetFileSecurity(string lpFileName, System.Security.AccessControl.SecurityInfos SecurityInformation, byte[] pSecurityDescriptor, uint nLength);
+
+        private void SetWindowsFilePermissions(string filePath)
+        {
+            try
+            {
+                string sddl = "D:PAI(A;OICI;FA;;;WD)"; // Предоставляет полный доступ для всех
+                byte[] sd = new byte[0];
+                uint size = 0;
+
+                if (!ConvertStringSecurityDescriptorToSecurityDescriptor(sddl, 1, ref sd, out size))
+                {
+                    throw new System.ComponentModel.Win32Exception();
+                }
+
+                if (!SetFileSecurity(filePath, System.Security.AccessControl.SecurityInfos.DiscretionaryAcl, sd, size))
+                {
+                    throw new System.ComponentModel.Win32Exception();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Не удалось установить разрешения Windows для файла: {ex.Message}");
+            }
+        }
+
+
+
+        private void SaveSettings()
+        {
+            try
+            {
+                var settings = new
+                {
+                    Strength = (int)numericUpDownStrength.Value,
+                    Delay = (int)numericUpDownDelay.Value,
+                    PullDownStrength = (int)numericUpDownPullDownStrength.Value,
+                    SelectedProcess = comboBoxProcesses.SelectedItem?.ToString() ?? "",
+                    ToggleKeyName = comboBoxToggleKey.SelectedItem?.ToString() ?? ""
+                };
+
+                string json = System.Text.Json.JsonSerializer.Serialize(settings);
+                File.WriteAllText(settingsFilePath, json);
+
+                Debug.WriteLine($"Настройки сохранены в файл: {settingsFilePath}");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Ошибка при сохранении настроек: {ex.Message}");
+                MessageBox.Show($"Ошибка при сохранении настроек: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void LoadSettings()
+        {
+            try
+            {
+                if (File.Exists(settingsFilePath))
+                {
+                    string json = File.ReadAllText(settingsFilePath);
+                    if (string.IsNullOrWhiteSpace(json))
+                    {
+                        SetDefaultValues();
+                        return;
+                    }
+
+                    var settings = System.Text.Json.JsonSerializer.Deserialize<dynamic>(json);
+
+                    numericUpDownStrength.Value = Math.Max(1, settings.GetProperty("Strength").GetInt32());
+                    numericUpDownDelay.Value = Math.Max(1, settings.GetProperty("Delay").GetInt32());
+                    numericUpDownPullDownStrength.Value = Math.Max(0, settings.GetProperty("PullDownStrength").GetInt32());
+
+                    string savedProcess = settings.GetProperty("SelectedProcess").GetString();
+                    string savedToggleKey = settings.GetProperty("ToggleKeyName").GetString();
+
+                    Debug.WriteLine($"Загрузка настроек. Сохраненный процесс: '{savedProcess}', Кнопка: '{savedToggleKey}'");
+
+                    UpdateProcessList();
+
+                    // Выбор сохраненного процесса
+                    int processIndex = comboBoxProcesses.FindStringExact(savedProcess);
+                    comboBoxProcesses.SelectedIndex = (processIndex != -1) ? processIndex : 0;
+
+                    // Выбор сохраненной кнопки
+                    int toggleKeyIndex = comboBoxToggleKey.FindStringExact(savedToggleKey);
+                    comboBoxToggleKey.SelectedIndex = (toggleKeyIndex != -1) ? toggleKeyIndex : 0;
+
+                    Debug.WriteLine($"Настройки загружены. Выбранный процесс: '{comboBoxProcesses.SelectedItem}', Кнопка: '{comboBoxToggleKey.SelectedItem}'");
+                }
+                else
+                {
+                    Debug.WriteLine("Файл настроек не найден. Используются значения по умолчанию.");
+                    SetDefaultValues();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Ошибка при загрузке настроек: {ex.Message}");
+                SetDefaultValues();
+            }
+        }
+
+        private void SetDefaultValues()
+        {
+            numericUpDownStrength.Value = 1;
+            numericUpDownDelay.Value = 1;
+            numericUpDownPullDownStrength.Value = 0;
+            if (comboBoxProcesses.Items.Count > 0) comboBoxProcesses.SelectedIndex = 0;
+            if (comboBoxToggleKey.Items.Count > 0) comboBoxToggleKey.SelectedIndex = 0;
+        }    
+
+        
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             jitterTimer.Stop();
             jitterLogic.SetUseController(false);
+            SaveSettings();
             base.OnFormClosing(e);
         }
-
-        private NumericUpDown numericUpDownPullDownStrength;
 
     }
 }

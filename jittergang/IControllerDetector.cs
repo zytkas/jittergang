@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace JitterGang
+﻿namespace JitterGang
 {
     /// <summary>
     /// Defines the interface for handling controller input.

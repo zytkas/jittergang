@@ -15,8 +15,8 @@ namespace JitterGang
         private readonly int strength;
         private int currentDirection = 1;
         private int moveCount = 0;
-        private const int MovesPerDirection = 10; // Увеличено количество движений в одном направлении
-        private const int MicroStrength = 1; // Минимальное смещение за одно движение
+        private const int MovesPerDirection = 10;
+        private const int MicroStrength = 1;
 
         public LeftRightJitter(int strength)
         {
@@ -65,8 +65,8 @@ namespace JitterGang
     {
         private readonly int strength;
         private double angle;
-        private const double FrequencyMultiplier = 32.0; 
-        private const double AngleIncrement = 0.05; 
+        private const double FrequencyMultiplier = 32.0;
+        private const double AngleIncrement = 0.5;
 
         public SmoothLeftRightJitter(int strength)
         {
@@ -135,7 +135,7 @@ namespace JitterGang
         public int PullDownStrength { get; private set; }
         public bool UseController { get; private set; }
         public bool IsCircleJitterActive { get; set; }
-        
+
         private ControllerHandler controllerHandler;
 
         public int ToggleKey
@@ -251,8 +251,8 @@ namespace JitterGang
                 }
             }
         }
-        
-    
+
+
 
         private static bool IsCursorInWindow(POINT cursorPos, RECT windowRect)
         {
