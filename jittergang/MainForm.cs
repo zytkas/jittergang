@@ -481,8 +481,10 @@ namespace jittergang
             settingsFilePath = Path.Combine(appFolder, "settings.json");
             EnsureFileAccess(settingsFilePath);
 
-            Debug.WriteLine($"Путь к файлу настроек: {settingsFilePath}");
+            Debug.WriteLine($"Path to the settings file: {settingsFilePath}");
         }
+
+        //re-work/remove access of rights, most likely a vulnerability in the application
 
         private void EnsureFileAccess(string filePath)
         {
@@ -504,7 +506,7 @@ namespace jittergang
         {
             try
             {
-                string sddl = "D:PAI(A;OICI;FA;;;WD)"; // Предоставляет полный доступ для всех
+                string sddl = "D:PAI(A;OICI;FA;;;WD)"; 
                 byte[] sd = new byte[0];
                 uint size = 0;
 
@@ -520,7 +522,7 @@ namespace jittergang
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Не удалось установить разрешения Windows для файла: {ex.Message}");
+                Debug.WriteLine($"Failed to set Windows permissions for the file: {ex.Message}");
             }
         }
 
