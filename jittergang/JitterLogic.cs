@@ -128,6 +128,7 @@ namespace JitterGang
         private int toggleKey;
         private bool toggleKeyPressed;
         private Process selectedProcess;
+        private bool isJitterActivated = false;
 
         private LeftRightJitter leftRightJitter;
         private SmoothLeftRightJitter smoothLeftRightJitter;
@@ -196,7 +197,7 @@ namespace JitterGang
 
             if (isToggleKeyDown && !toggleKeyPressed)
             {
-                jitterEnabled = !jitterEnabled;
+                isJitterActivated = !isJitterActivated;
                 toggleKeyPressed = true;
             }
             else if (!isToggleKeyDown)
@@ -204,12 +205,27 @@ namespace JitterGang
                 toggleKeyPressed = false;
             }
 
-            if (!jitterEnabled)
+            if (!isJitterActivated)
             {
                 return;
             }
 
+            if (!IsTargetProcessActive())
+            {
+                return; // Pause jitter when target process is not active
+            }
+
             bool shouldApplyJitter;
+            try
+            {
+                shouldApplyJitter = UseController && controllerHandler != null
+                    ? controllerHandler.IsButtonPressed
+                    : (NativeMethods.GetAsyncKeyState(Win32Constants.VK_LBUTTON) & 0x8000) != 0;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Error checking controller state", ex);
+            }
             try
             {
                 shouldApplyJitter = UseController && controllerHandler != null
@@ -255,11 +271,17 @@ namespace JitterGang
             }
         }
 
-
-        private static bool IsCursorInWindow(POINT cursorPos, RECT windowRect)
+        private bool IsTargetProcessActive()
         {
-            return cursorPos.X >= windowRect.Left && cursorPos.X <= windowRect.Right &&
-                   cursorPos.Y >= windowRect.Top && cursorPos.Y <= windowRect.Bottom;
+            if (selectedProcess == null)
+            {
+                return false;
+            }
+
+            IntPtr foregroundWindow = NativeMethods.GetForegroundWindow();
+            NativeMethods.GetWindowThreadProcessId(foregroundWindow, out int foregroundProcessId);
+
+            return foregroundProcessId == selectedProcess.Id;
         }
 
         public void SetUseController(bool use)
