@@ -1,8 +1,5 @@
 ﻿using SharpDX.DirectInput;
 using SharpDX.XInput;
-using static System.Net.Mime.MediaTypeNames;
-using System.Windows.Forms;
-using System.Xml.Linq;
 using DirectInputDeviceType = SharpDX.DirectInput.DeviceType;
 
 namespace JitterGang

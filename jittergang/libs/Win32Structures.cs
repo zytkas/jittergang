@@ -1,5 +1,4 @@
-﻿// Win32Structures.cs
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace JitterGang.Win32
 {

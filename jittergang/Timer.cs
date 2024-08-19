@@ -46,10 +46,11 @@ namespace JitterGang
             }
             _stopwatch.Stop();
         }
+
         private async Task TimerLoopAsync()
         {
             long nextTick = _stopwatch.ElapsedTicks;
-            long minWaitTicks = Stopwatch.Frequency / 1000; // Минимальное время ожидания (1 мс)
+            long minWaitTicks = Stopwatch.Frequency / 1000;
 
             while (!_cts.Token.IsCancellationRequested)
             {

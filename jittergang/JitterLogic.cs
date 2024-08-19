@@ -61,6 +61,8 @@ namespace JitterGang
         }
     }
 
+
+    //Takes no params, ‘strength’ values should be muted while roller is active, tbd.
     public class SmoothLeftRightJitter : BaseJitter
     {
         private const int Radius = 2; 
@@ -74,15 +76,13 @@ namespace JitterGang
 
         public override void ApplyJitter(ref INPUT input)
         {
-            // Расчет смещения по X и Y
+
             double deltaX = Radius * Math.Cos(angle);
             double deltaY = Radius * Math.Sin(angle);
 
-            // Применение смещения с округлением до ближайшего целого
             input.Mi.Dx += (int)Math.Round(deltaX);
             input.Mi.Dy += (int)Math.Round(deltaY);
 
-            // Обновление угла
             angle += AngleIncrement;
             if (angle >= 2 * Math.PI)
             {
