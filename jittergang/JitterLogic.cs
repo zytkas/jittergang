@@ -256,7 +256,6 @@ namespace JitterGang
         }
 
 
-
         private static bool IsCursorInWindow(POINT cursorPos, RECT windowRect)
         {
             return cursorPos.X >= windowRect.Left && cursorPos.X <= windowRect.Right &&
