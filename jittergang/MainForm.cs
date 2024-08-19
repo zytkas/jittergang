@@ -607,7 +607,6 @@ namespace jittergang
             if (comboBoxToggleKey.Items.Count > 0) comboBoxToggleKey.SelectedIndex = 0;
         }
 
-
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             jitterTimer.Stop();

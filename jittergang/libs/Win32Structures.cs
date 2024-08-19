@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace JitterGang.Win32
 {
+
     public static class NativeMethods
     {
         [DllImport("user32.dll", SetLastError = true)]
