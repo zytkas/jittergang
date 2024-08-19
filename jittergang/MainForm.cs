@@ -294,15 +294,15 @@ namespace jittergang
         }
 
         private void buttonStop_Click(object sender, EventArgs e)
-                {
-                    if (jitterTimer.IsRunning)
-                    {
-                        jitterTimer.Stop();
-                        buttonStart.Enabled = true;
-                        buttonStop.Enabled = false;
-                        jitterLogic.StopJitter();
-                    }
-                }
+        {
+            if (jitterTimer.IsRunning)
+            {
+                jitterTimer.Stop();
+                buttonStart.Enabled = true;
+                buttonStop.Enabled = false;
+                jitterLogic.StopJitter();
+            }
+        }
 
 
 
@@ -315,12 +315,12 @@ namespace jittergang
 
         private void numericUpDownPullDownStrength_ValueChanged(object sender, EventArgs e)
         {
-                jitterLogic.UpdatePullDownStrength((int)numericUpDownPullDownStrength.Value);
-                jitterLogic.UpdateJitters();
-                SaveSettings();
+            jitterLogic.UpdatePullDownStrength((int)numericUpDownPullDownStrength.Value);
+            jitterLogic.UpdateJitters();
+            SaveSettings();
         }
 
-        
+
 
         private void comboBoxProcesses_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -334,7 +334,7 @@ namespace jittergang
 
         private void ComboBoxProcesses_DropDown(object sender, EventArgs e)
         {
-         if (isProcessListInitialized)
+            if (isProcessListInitialized)
             {
                 UpdateProcessList();
             }
@@ -387,27 +387,27 @@ namespace jittergang
         private void SetToggleKey(string keyName)
         {
             switch (keyName)
-            {                    
-                    case "F1": jitterLogic.ToggleKey = 0x70; break;
-                    case "F2": jitterLogic.ToggleKey = 0x71; break;
-                    case "F3": jitterLogic.ToggleKey = 0x72; break;
-                    case "F4": jitterLogic.ToggleKey = 0x73; break;
-                    case "F5": jitterLogic.ToggleKey = 0x74; break;
-                    case "F6": jitterLogic.ToggleKey = 0x75; break;
-                    case "F7": jitterLogic.ToggleKey = 0x76; break;
-                    case "F8": jitterLogic.ToggleKey = 0x77; break;
-                    case "F9": jitterLogic.ToggleKey = 0x78; break;
-                    case "F10": jitterLogic.ToggleKey = 0x79; break;
-                    case "F11": jitterLogic.ToggleKey = 0x7A; break;
-                    case "F12": jitterLogic.ToggleKey = 0x7B; break;
-                    case "Shift": jitterLogic.ToggleKey = 0x10; break;
-                    case "X1": jitterLogic.ToggleKey = 0x05; break;
-                    case "X2": jitterLogic.ToggleKey = 0x06; break;
-                    default: jitterLogic.ToggleKey = 0x70; break;
+            {
+                case "F1": jitterLogic.ToggleKey = 0x70; break;
+                case "F2": jitterLogic.ToggleKey = 0x71; break;
+                case "F3": jitterLogic.ToggleKey = 0x72; break;
+                case "F4": jitterLogic.ToggleKey = 0x73; break;
+                case "F5": jitterLogic.ToggleKey = 0x74; break;
+                case "F6": jitterLogic.ToggleKey = 0x75; break;
+                case "F7": jitterLogic.ToggleKey = 0x76; break;
+                case "F8": jitterLogic.ToggleKey = 0x77; break;
+                case "F9": jitterLogic.ToggleKey = 0x78; break;
+                case "F10": jitterLogic.ToggleKey = 0x79; break;
+                case "F11": jitterLogic.ToggleKey = 0x7A; break;
+                case "F12": jitterLogic.ToggleKey = 0x7B; break;
+                case "Shift": jitterLogic.ToggleKey = 0x10; break;
+                case "X1": jitterLogic.ToggleKey = 0x05; break;
+                case "X2": jitterLogic.ToggleKey = 0x06; break;
+                default: jitterLogic.ToggleKey = 0x70; break;
             }
         }
 
-  
+
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
@@ -524,8 +524,6 @@ namespace jittergang
             }
         }
 
-
-
         private void SaveSettings()
         {
             try
@@ -607,9 +605,9 @@ namespace jittergang
             numericUpDownPullDownStrength.Value = 0;
             if (comboBoxProcesses.Items.Count > 0) comboBoxProcesses.SelectedIndex = 0;
             if (comboBoxToggleKey.Items.Count > 0) comboBoxToggleKey.SelectedIndex = 0;
-        }    
+        }
 
-        
+
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             jitterTimer.Stop();

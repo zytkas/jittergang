@@ -63,30 +63,33 @@ namespace JitterGang
 
     public class SmoothLeftRightJitter : BaseJitter
     {
-        private readonly int strength;
+        private const int Radius = 2; 
+        private const double AngleIncrement = 0.09; 
         private double angle;
-        private const double FrequencyMultiplier = 32.0;
-        private const double AngleIncrement = 0.5;
 
-        public SmoothLeftRightJitter(int strength)
-        {
-            this.strength = strength;
+        public SmoothLeftRightJitter()
+        {   
             this.angle = 0;
         }
 
         public override void ApplyJitter(ref INPUT input)
         {
-            double movement = Math.Sin(angle) * strength;
-            input.Mi.Dx += (int)Math.Round(movement);
+            // Расчет смещения по X и Y
+            double deltaX = Radius * Math.Cos(angle);
+            double deltaY = Radius * Math.Sin(angle);
 
-            angle += AngleIncrement * FrequencyMultiplier;
+            // Применение смещения с округлением до ближайшего целого
+            input.Mi.Dx += (int)Math.Round(deltaX);
+            input.Mi.Dy += (int)Math.Round(deltaY);
+
+            // Обновление угла
+            angle += AngleIncrement;
             if (angle >= 2 * Math.PI)
             {
                 angle -= 2 * Math.PI;
             }
         }
     }
-
 
     public class PullDownJitter : BaseJitter
     {
@@ -178,7 +181,7 @@ namespace JitterGang
         public void UpdateJitters()
         {
             leftRightJitter = new LeftRightJitter(Strength);
-            smoothLeftRightJitter = new SmoothLeftRightJitter(Strength);
+            smoothLeftRightJitter = new SmoothLeftRightJitter();
             circleJitter = new CircleJitter(Strength);
             pullDownJitter = new PullDownJitter(PullDownStrength);
         }
