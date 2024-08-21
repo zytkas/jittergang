@@ -470,8 +470,8 @@ namespace jittergang
 
         private void InitializeSettingsPath()
         {
-            string baseFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            string appFolder = Path.Combine(baseFolder, "JitterGang");
+            string documentsFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string appFolder = Path.Combine(documentsFolder, "JitterGang");
 
             if (!Directory.Exists(appFolder))
             {
@@ -480,49 +480,20 @@ namespace jittergang
 
             settingsFilePath = Path.Combine(appFolder, "settings.json");
             EnsureFileAccess(settingsFilePath);
-
-            Debug.WriteLine($"Path to the settings file: {settingsFilePath}");
         }
-
-        //re-work/remove access of rights, most likely a vulnerability in the application
 
         private void EnsureFileAccess(string filePath)
         {
             if (!File.Exists(filePath))
             {
-                using (File.Create(filePath)) { }
-            }
-
-            SetWindowsFilePermissions(filePath);
-        }
-
-        [DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        static extern bool ConvertStringSecurityDescriptorToSecurityDescriptor(string StringSecurityDescriptor, uint StringSDRevision, ref byte[] SecurityDescriptor, out uint SecurityDescriptorSize);
-
-        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        static extern bool SetFileSecurity(string lpFileName, System.Security.AccessControl.SecurityInfos SecurityInformation, byte[] pSecurityDescriptor, uint nLength);
-
-        private void SetWindowsFilePermissions(string filePath)
-        {
-            try
-            {
-                string sddl = "D:PAI(A;OICI;FA;;;WD)"; 
-                byte[] sd = new byte[0];
-                uint size = 0;
-
-                if (!ConvertStringSecurityDescriptorToSecurityDescriptor(sddl, 1, ref sd, out size))
+                try
                 {
-                    throw new System.ComponentModel.Win32Exception();
+                    using (File.Create(filePath)) { }
                 }
-
-                if (!SetFileSecurity(filePath, System.Security.AccessControl.SecurityInfos.DiscretionaryAcl, sd, size))
+                catch (Exception ex)
                 {
-                    throw new System.ComponentModel.Win32Exception();
+                    MessageBox.Show($"Failed to create settings file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Failed to set Windows permissions for the file: {ex.Message}");
             }
         }
 
@@ -542,12 +513,10 @@ namespace jittergang
                 string json = System.Text.Json.JsonSerializer.Serialize(settings);
                 File.WriteAllText(settingsFilePath, json);
 
-                Debug.WriteLine($"Настройки сохранены в файл: {settingsFilePath}");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Ошибка при сохранении настроек: {ex.Message}");
-                MessageBox.Show($"Ошибка при сохранении настроек: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error when saving settings {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
