@@ -269,7 +269,6 @@ namespace jittergang
             isProcessListInitialized = true;
         }
 
-
         private void buttonStart_Click(object sender, EventArgs e)
         {
             try
@@ -304,8 +303,6 @@ namespace jittergang
             }
         }
 
-
-
         private void numericUpDownStrength_ValueChanged(object sender, EventArgs e)
         {
             jitterLogic.UpdateStrength((int)numericUpDownStrength.Value);
@@ -319,8 +316,6 @@ namespace jittergang
             jitterLogic.UpdateJitters();
             SaveSettings();
         }
-
-
 
         private void comboBoxProcesses_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -373,7 +368,6 @@ namespace jittergang
             }
         }
 
-
         private void comboBoxToggleKey_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBoxToggleKey.SelectedItem != null)
@@ -407,27 +401,46 @@ namespace jittergang
             }
         }
 
-
-
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             jitterLogic.IsCircleJitterActive = checkBox2.Checked;
         }
 
-
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                jitterLogic.SetUseController(checkBox1.Checked);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                checkBox1.Checked = false;
-            }
-        }
+                try
+                {
+                    bool useController = checkBox1.Checked;
+                    jitterLogic.SetUseController(useController);
 
+                    SetStrengthControlsState(!useController);
+
+                    // Update the jitter logic
+                    jitterLogic.UpdateStrength((int)numericUpDownStrength.Value);
+                    jitterLogic.UpdatePullDownStrength((int)numericUpDownPullDownStrength.Value);
+                    jitterLogic.UpdateJitters();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    checkBox1.Checked = false;
+                }
+
+                void SetStrengthControlsState(bool enabled)
+                {
+                    Color enabledColor = Color.White;
+                    Color disabledColor = Color.FromArgb(64, 64, 64); 
+
+                    // Update numericUpDownStrength
+                    numericUpDownStrength.Enabled = enabled;
+                    numericUpDownStrength.BackColor = enabled ? Color.FromArgb(33, 33, 33) : disabledColor;
+                    numericUpDownStrength.ForeColor = enabled ? enabledColor : disabledColor;
+
+                    label2.ForeColor = enabled ? enabledColor : disabledColor; // "Strength" label
+
+                }
+
+        }
 
         private void ValidateParameters()
         {
@@ -542,19 +555,16 @@ namespace jittergang
                     string savedProcess = settings.GetProperty("SelectedProcess").GetString();
                     string savedToggleKey = settings.GetProperty("ToggleKeyName").GetString();
 
-                    Debug.WriteLine($"Загрузка настроек. Сохраненный процесс: '{savedProcess}', Кнопка: '{savedToggleKey}'");
+
 
                     UpdateProcessList();
 
-                    // Выбор сохраненного процесса
                     int processIndex = comboBoxProcesses.FindStringExact(savedProcess);
                     comboBoxProcesses.SelectedIndex = (processIndex != -1) ? processIndex : 0;
 
-                    // Выбор сохраненной кнопки
+
                     int toggleKeyIndex = comboBoxToggleKey.FindStringExact(savedToggleKey);
                     comboBoxToggleKey.SelectedIndex = (toggleKeyIndex != -1) ? toggleKeyIndex : 0;
-
-                    Debug.WriteLine($"Настройки загружены. Выбранный процесс: '{comboBoxProcesses.SelectedItem}', Кнопка: '{comboBoxToggleKey.SelectedItem}'");
                 }
                 else
                 {

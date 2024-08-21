@@ -62,7 +62,6 @@ namespace JitterGang
     }
 
 
-    //Takes no params, ‘strength’ values should be muted while roller is active, tbd.
     public class SmoothLeftRightJitter : BaseJitter
     {
         private const int Radius = 2; 
