@@ -101,7 +101,7 @@ namespace JitterGang
 
         public override void ApplyJitter(ref INPUT input)
         {
-            float weakenedStrength = strength / 8.0f;
+            float weakenedStrength = strength / 60.0f;
 
             accumulatedStrength += (int)(weakenedStrength * 100);
 
