@@ -9,7 +9,6 @@ namespace JitterGang
         public abstract void ApplyJitter(ref INPUT input);
     }
 
-
     public class LeftRightJitter : BaseJitter
     {
         private readonly int strength;
@@ -61,15 +60,14 @@ namespace JitterGang
         }
     }
 
-
     public class SmoothLeftRightJitter : BaseJitter
     {
-        private const int Radius = 2; 
-        private const double AngleIncrement = 0.09; 
+        private const int Radius = 2;
+        private const double AngleIncrement = 0.09;
         private double angle;
 
         public SmoothLeftRightJitter()
-        {   
+        {
             this.angle = 0;
         }
 

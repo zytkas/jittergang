@@ -1,9 +1,5 @@
 ﻿using JitterGang;
-using System.Configuration;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
-using System.Security.AccessControl;
-using System.Security.Principal;
 
 
 namespace jittergang
@@ -408,37 +404,37 @@ namespace jittergang
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-                try
-                {
-                    bool useController = checkBox1.Checked;
-                    jitterLogic.SetUseController(useController);
+            try
+            {
+                bool useController = checkBox1.Checked;
+                jitterLogic.SetUseController(useController);
 
-                    SetStrengthControlsState(!useController);
+                SetStrengthControlsState(!useController);
 
-                    // Update the jitter logic
-                    jitterLogic.UpdateStrength((int)numericUpDownStrength.Value);
-                    jitterLogic.UpdatePullDownStrength((int)numericUpDownPullDownStrength.Value);
-                    jitterLogic.UpdateJitters();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    checkBox1.Checked = false;
-                }
+                // Update the jitter logic
+                jitterLogic.UpdateStrength((int)numericUpDownStrength.Value);
+                jitterLogic.UpdatePullDownStrength((int)numericUpDownPullDownStrength.Value);
+                jitterLogic.UpdateJitters();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                checkBox1.Checked = false;
+            }
 
-                void SetStrengthControlsState(bool enabled)
-                {
-                    Color enabledColor = Color.White;
-                    Color disabledColor = Color.FromArgb(64, 64, 64); 
+            void SetStrengthControlsState(bool enabled)
+            {
+                Color enabledColor = Color.White;
+                Color disabledColor = Color.FromArgb(64, 64, 64);
 
-                    // Update numericUpDownStrength
-                    numericUpDownStrength.Enabled = enabled;
-                    numericUpDownStrength.BackColor = enabled ? Color.FromArgb(33, 33, 33) : disabledColor;
-                    numericUpDownStrength.ForeColor = enabled ? enabledColor : disabledColor;
+                // Update numericUpDownStrength
+                numericUpDownStrength.Enabled = enabled;
+                numericUpDownStrength.BackColor = enabled ? Color.FromArgb(33, 33, 33) : disabledColor;
+                numericUpDownStrength.ForeColor = enabled ? enabledColor : disabledColor;
 
-                    label2.ForeColor = enabled ? enabledColor : disabledColor; // "Strength" label
+                label2.ForeColor = enabled ? enabledColor : disabledColor; // "Strength" label
 
-                }
+            }
 
         }
 
