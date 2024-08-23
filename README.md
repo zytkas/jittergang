@@ -54,7 +54,7 @@ JitterGang is a customizable mouse jitter tool designed for gaming and other app
 
 ## Configuration
 
-JitterGang automatically saves your settings to `%LocalAppData%\JitterGang\settings.json`. This file stores your preferences for easy access in future sessions.
+JitterGang automatically saves your settings to `C:\Users\[username]\Documents\JitterGang\settings.json`. This file stores your preferences for easy access in future sessions.
 
 ## Contributing
 
