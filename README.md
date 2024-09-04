@@ -37,7 +37,7 @@ JitterGang is a customizable mouse jitter tool designed for gaming and other app
 
 - **Mouse**: The jitter effect is only active while the left mouse button is pressed.
 - **Controller**: When using a controller, the jitter is only activated when the Right Trigger (RT) is pressed, not other buttons.
-- **Controller Jitter**: When the controller is active, the strength parameter does not affect the jitter intensity. *will be fixed*
+- **Controller Jitter**: When the controller is active, the strength parameter does not affect the jitter intensity.
 
 
 ### Controls
