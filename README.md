@@ -51,6 +51,7 @@ JitterGang is a customizable mouse jitter tool designed for gaming and other app
 | Turn ON/OFF | Choose a hotkey to toggle the jitter effect |
 | CircleJitter | Enable circular jitter pattern |
 | Controller | Enable controller support for triggering the jitter effect |
+| ADS Only | Enable jitter only when the RT and LT buttons are pressed simultaneously |
 
 ## Configuration
 
