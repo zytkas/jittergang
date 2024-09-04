@@ -136,6 +136,8 @@ namespace JitterGang
         public int PullDownStrength { get; private set; }
         public bool UseController { get; private set; }
         public bool IsCircleJitterActive { get; set; }
+        public bool UseAdsOnly { get; set; }
+
 
         private ControllerHandler controllerHandler;
 
@@ -215,19 +217,22 @@ namespace JitterGang
             bool shouldApplyJitter;
             try
             {
-                shouldApplyJitter = UseController && controllerHandler != null
-                    ? controllerHandler.IsButtonPressed
-                    : (NativeMethods.GetAsyncKeyState(Win32Constants.VK_LBUTTON) & 0x8000) != 0;
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException("Error checking controller state", ex);
-            }
-            try
-            {
-                shouldApplyJitter = UseController && controllerHandler != null
-                    ? controllerHandler.IsButtonPressed
-                    : (NativeMethods.GetAsyncKeyState(Win32Constants.VK_LBUTTON) & 0x8000) != 0;
+                if (UseController && controllerHandler != null)
+                {
+                    if (UseAdsOnly)
+                    {
+                        shouldApplyJitter = controllerHandler.IsRightTriggerPressed && controllerHandler.IsLeftTriggerPressed;
+                    }
+                    else
+                    {
+                        shouldApplyJitter = controllerHandler.IsRightTriggerPressed;
+                       
+                    }
+                }
+                else
+                {
+                    shouldApplyJitter = (NativeMethods.GetAsyncKeyState(Win32Constants.VK_LBUTTON) & 0x8000) != 0;
+                }
             }
             catch (Exception ex)
             {

@@ -20,8 +20,9 @@ namespace jittergang
         private Button buttonStart;
         private Button buttonStop;
         private ComboBox comboBoxToggleKey;
-        private CheckBox checkBox2;
         private CheckBox checkBox1;
+        private CheckBox checkBox2;
+        private CheckBox checkBoxAdsOnly;
         private Label label1;
         private Label label2;
         private Label label3;
@@ -59,6 +60,7 @@ namespace jittergang
             checkBox1 = new CheckBox();
             label5 = new Label();
             numericUpDownPullDownStrength = new NumericUpDown();
+            checkBoxAdsOnly = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)numericUpDownStrength).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownDelay).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPullDownStrength).BeginInit();
@@ -99,7 +101,7 @@ namespace jittergang
             // buttonStart
             // 
             buttonStart.FlatAppearance.BorderSize = 0;
-            buttonStart.Location = new Point(63, 379);
+            buttonStart.Location = new Point(63, 410);
             buttonStart.Name = "buttonStart";
             buttonStart.Size = new Size(74, 26);
             buttonStart.TabIndex = 4;
@@ -109,7 +111,7 @@ namespace jittergang
             // buttonStop
             // 
             buttonStop.FlatAppearance.BorderSize = 0;
-            buttonStop.Location = new Point(187, 379);
+            buttonStop.Location = new Point(187, 410);
             buttonStop.Name = "buttonStop";
             buttonStop.Size = new Size(75, 26);
             buttonStop.TabIndex = 5;
@@ -168,7 +170,7 @@ namespace jittergang
             linkLabel1.AutoSize = true;
             linkLabel1.LinkBehavior = LinkBehavior.HoverUnderline;
             linkLabel1.LinkColor = Color.WhiteSmoke;
-            linkLabel1.Location = new Point(112, 435);
+            linkLabel1.Location = new Point(112, 456);
             linkLabel1.Name = "linkLabel1";
             linkLabel1.Size = new Size(105, 20);
             linkLabel1.TabIndex = 14;
@@ -179,7 +181,7 @@ namespace jittergang
             // 
             checkBox2.AutoSize = true;
             checkBox2.ForeColor = Color.White;
-            checkBox2.Location = new Point(114, 308);
+            checkBox2.Location = new Point(118, 308);
             checkBox2.Name = "checkBox2";
             checkBox2.Size = new Size(96, 24);
             checkBox2.TabIndex = 16;
@@ -191,11 +193,11 @@ namespace jittergang
             // 
             checkBox1.AutoSize = true;
             checkBox1.ForeColor = Color.White;
-            checkBox1.Location = new Point(112, 338);
+            checkBox1.Location = new Point(116, 338);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(100, 24);
             checkBox1.TabIndex = 17;
-            checkBox1.Text = "Contorller?";
+            checkBox1.Text = "Controller?";
             checkBox1.UseVisualStyleBackColor = true;
             checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
@@ -220,12 +222,24 @@ namespace jittergang
             numericUpDownPullDownStrength.TabIndex = 20;
             numericUpDownPullDownStrength.ValueChanged += numericUpDownPullDownStrength_ValueChanged;
             // 
+            // checkBoxAdsOnly
+            // 
+            checkBoxAdsOnly.AutoSize = true;
+            checkBoxAdsOnly.Location = new Point(122, 370);
+            checkBoxAdsOnly.Name = "checkBoxAdsOnly";
+            checkBoxAdsOnly.Size = new Size(88, 24);
+            checkBoxAdsOnly.TabIndex = 21;
+            checkBoxAdsOnly.Text = "ADS only";
+            checkBoxAdsOnly.UseVisualStyleBackColor = true;
+            checkBoxAdsOnly.CheckedChanged += checkBoxAdsOnly_CheckedChanged;
+            // 
             // MainForm
             // 
             AutoScaleMode = AutoScaleMode.None;
             AutoScroll = true;
             BackColor = Color.FromArgb(33, 33, 33);
-            ClientSize = new Size(318, 464);
+            ClientSize = new Size(318, 489);
+            Controls.Add(checkBoxAdsOnly);
             Controls.Add(numericUpDownPullDownStrength);
             Controls.Add(label5);
             Controls.Add(checkBox1);
@@ -438,6 +452,11 @@ namespace jittergang
 
         }
 
+        private void checkBoxAdsOnly_CheckedChanged(object sender, EventArgs e)
+        {
+            jitterLogic.UseAdsOnly = checkBoxAdsOnly.Checked;
+        }
+
         private void ValidateParameters()
         {
             if (numericUpDownStrength.Value < 1)
@@ -591,6 +610,7 @@ namespace jittergang
             SaveSettings();
             base.OnFormClosing(e);
         }
+
 
     }
 }

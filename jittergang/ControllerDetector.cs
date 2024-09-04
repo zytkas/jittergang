@@ -1,5 +1,6 @@
 ﻿using SharpDX.DirectInput;
 using SharpDX.XInput;
+using System.Diagnostics;
 using DirectInputDeviceType = SharpDX.DirectInput.DeviceType;
 
 namespace JitterGang
@@ -36,13 +37,14 @@ namespace JitterGang
         protected Task pollingTask;
         protected bool isRunning;
 
-        public bool IsButtonPressed { get; protected set; }
+        public bool IsRightTriggerPressed { get; protected set; }
+        public bool IsLeftTriggerPressed { get; protected set; }
 
         public abstract void StartPolling();
         public abstract void StopPolling();
         public abstract void Dispose();
     }
-
+    
     public class DirectInputHandler : ControllerHandler
     {
         private readonly DirectInput directInput;
@@ -96,18 +98,19 @@ namespace JitterGang
                     if (joystick != null && IsJoystickConnected())
                     {
                         var state = joystick.GetCurrentState();
-                        IsButtonPressed = state.Buttons[7];
+                        IsRightTriggerPressed = state.Buttons[7];
+                        IsLeftTriggerPressed = state.Buttons[6];
                     }
                     else
                     {
-                        Console.WriteLine("DirectInput controller disconnected. Waiting for reconnection...");
+                        Debug.WriteLine("DirectInput controller disconnected. Waiting for reconnection...");
                         InitializeJoystick();
                         await Task.Delay(ReconnectionDelayMs);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error polling DirectInput controller: {ex.Message}");
+                    Debug.WriteLine($"Error polling DirectInput controller: {ex.Message}");
                     joystick = null;
                     await Task.Delay(ReconnectionDelayMs);
                 }
@@ -147,7 +150,7 @@ namespace JitterGang
             controller = new Controller(userIndex);
             if (!controller.IsConnected)
             {
-                Console.WriteLine($"XInput controller {userIndex} is not connected. Will wait for connection.");
+                Debug.WriteLine($"XInput controller {userIndex} is not connected. Will wait for connection.");
             }
         }
 
@@ -175,17 +178,18 @@ namespace JitterGang
                     if (controller.IsConnected)
                     {
                         var state = controller.GetState();
-                        IsButtonPressed = state.Gamepad.RightTrigger > TriggerThreshold * 255;
+                        IsRightTriggerPressed = state.Gamepad.RightTrigger > TriggerThreshold * 255;
+                        IsLeftTriggerPressed = state.Gamepad.LeftTrigger > TriggerThreshold * 255;
                     }
                     else
                     {
-                        Console.WriteLine("Controller disconnected. Waiting for reconnection...");
+                        Debug.WriteLine("XInput controller disconnected. Waiting for reconnection...");
                         await Task.Delay(ReconnectionDelayMs);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error polling XInput controller: {ex.Message}");
+                    Debug.WriteLine($"Error polling XInput controller: {ex.Message}");
                     await Task.Delay(ReconnectionDelayMs);
                 }
             }
