@@ -124,7 +124,7 @@ namespace JitterGang
         private bool jitterEnabled;
         private int toggleKey;
         private bool toggleKeyPressed;
-        private Process selectedProcess;
+        private string selectedProcessName;
         private bool isJitterActivated = false;
 
         private LeftRightJitter leftRightJitter;
@@ -138,17 +138,11 @@ namespace JitterGang
         public bool IsCircleJitterActive { get; set; }
         public bool UseAdsOnly { get; set; }
 
-
         private ControllerHandler controllerHandler;
 
         public int ToggleKey
         {
             set => toggleKey = value;
-        }
-
-        public Process SelectedProcess
-        {
-            set => selectedProcess = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         public JitterLogic()
@@ -273,9 +267,14 @@ namespace JitterGang
             }
         }
 
+        public void SetSelectedProcess(string processName)
+        {
+            selectedProcessName = processName;
+        }
+
         private bool IsTargetProcessActive()
         {
-            if (selectedProcess == null)
+            if (string.IsNullOrEmpty(selectedProcessName))
             {
                 return false;
             }
@@ -283,7 +282,8 @@ namespace JitterGang
             IntPtr foregroundWindow = NativeMethods.GetForegroundWindow();
             NativeMethods.GetWindowThreadProcessId(foregroundWindow, out int foregroundProcessId);
 
-            return foregroundProcessId == selectedProcess.Id;
+            var processes = Process.GetProcessesByName(selectedProcessName);
+            return processes.Any(p => p.Id == foregroundProcessId);
         }
 
         public void SetUseController(bool use)

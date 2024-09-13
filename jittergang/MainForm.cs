@@ -332,7 +332,7 @@ namespace jittergang
             if (comboBoxProcesses.SelectedItem != null)
             {
                 string selectedProcessName = comboBoxProcesses.SelectedItem.ToString();
-                jitterLogic.SelectedProcess = Process.GetProcessesByName(selectedProcessName).FirstOrDefault();
+                jitterLogic.SetSelectedProcess(selectedProcessName);
                 SaveSettings();
             }
         }
@@ -405,6 +405,7 @@ namespace jittergang
                 case "F11": jitterLogic.ToggleKey = 0x7A; break;
                 case "F12": jitterLogic.ToggleKey = 0x7B; break;
                 case "Shift": jitterLogic.ToggleKey = 0x10; break;
+                case "Capslock": jitterLogic.ToggleKey = 0x14; break;
                 case "X1": jitterLogic.ToggleKey = 0x05; break;
                 case "X2": jitterLogic.ToggleKey = 0x06; break;
                 default: jitterLogic.ToggleKey = 0x70; break;
@@ -492,7 +493,7 @@ namespace jittergang
             comboBoxToggleKey.Items.AddRange(new object[]
             {
         "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12",
-        "X1", "X2", "Shift"
+        "X1", "X2", "Shift", "Capslock"
             });
         }
 
