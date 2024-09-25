@@ -2,9 +2,10 @@
 using SharpDX.XInput;
 using System.Diagnostics;
 using DirectInputDeviceType = SharpDX.DirectInput.DeviceType;
-
 namespace JitterGang
 {
+
+
     public static class ControllerDetector
     {
         public static ControllerHandler DetectController()

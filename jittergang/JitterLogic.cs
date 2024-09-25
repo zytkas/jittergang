@@ -1,7 +1,6 @@
 ﻿using JitterGang.Win32;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-
 namespace JitterGang
 {
     public abstract class BaseJitter
@@ -127,6 +126,8 @@ namespace JitterGang
         private string selectedProcessName;
         private bool isJitterActivated = false;
 
+        
+
         private LeftRightJitter leftRightJitter;
         private SmoothLeftRightJitter smoothLeftRightJitter;
         private CircleJitter circleJitter;
@@ -247,6 +248,7 @@ namespace JitterGang
                     if (UseController)
                     {
                         smoothLeftRightJitter.ApplyJitter(ref inputs[0]);
+
                     }
 
 
