@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using JitterGang.Services;
+using System.Diagnostics;
 
 
 namespace JitterGang
@@ -86,18 +87,18 @@ namespace JitterGang
 
     public class JitterTimer : IDisposable
     {
-        private readonly JitterLogic _jitterLogic;
+        private readonly IJitterService _jitterService;
         private HighPrecisionTimer _timer;
 
-        public JitterTimer(JitterLogic jitterLogic)
+        public JitterTimer(IJitterService jitterService)
         {
-            _jitterLogic = jitterLogic ?? throw new ArgumentNullException(nameof(jitterLogic));
+            _jitterService = jitterService ?? throw new ArgumentNullException(nameof(jitterService));
         }
 
         public void Start(TimeSpan interval)
         {
             Stop();
-            _timer = new HighPrecisionTimer(interval, _jitterLogic.HandleShakeTimerTick);
+            _timer = new HighPrecisionTimer(interval, _jitterService.HandleShakeTimerTick);
             _timer.Start();
         }
 

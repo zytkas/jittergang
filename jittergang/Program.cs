@@ -1,13 +1,12 @@
-namespace jittergang
+namespace jittergang;
+
+internal static class Program
 {
-    static class Program
+    [STAThread]
+    private static void Main()
     {
-        [STAThread]
-        static void Main()
-        {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
-        }
+        Application.EnableVisualStyles();
+        Application.SetCompatibleTextRenderingDefault(false);
+        Application.Run(new MainForm());
     }
 }
