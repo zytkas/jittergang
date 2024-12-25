@@ -1,7 +1,9 @@
 ﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
 using JitterGang.Win32;
+using JitterGang.Services.Input.Controllers;
 using JitterGang.Services.Jitter;
+using JitterGang.Services.Timer;
 
 namespace JitterGang.Services;
 
@@ -9,6 +11,7 @@ public class JitterService : IJitterService
 {
     private bool _jitterEnabled;
     private int _toggleKey;
+    private int _delay;
     private bool _toggleKeyPressed;
     private string _selectedProcessName;
     private bool _isJitterActivated;
@@ -30,6 +33,7 @@ public class JitterService : IJitterService
 
     public JitterService()
     {
+        _delay = 1;
         Strength = 0;
         PullDownStrength = 0;
         UseController = false;
@@ -42,15 +46,11 @@ public class JitterService : IJitterService
     {
         Debug.WriteLine("JitterService.Start called");
         _jitterEnabled = true;
-        _isJitterActivated = true; // Добавим эту строку!
-        if (_jitterTimer != null && !IsRunning)
+        if (_jitterTimer != null)
         {
-            // Используем время задержки по умолчанию, можно будет добавить параметр позже
-            _jitterTimer.Start(TimeSpan.FromMilliseconds(1));
-            Debug.WriteLine("Timer started");
-        }
-        else {
-            Debug.WriteLine("Null timer");
+            var interval = TimeSpan.FromMilliseconds(_delay);
+            _jitterTimer.Start(interval);
+            Debug.WriteLine($"Timer started with interval: {interval.TotalMilliseconds}ms");
         }
     }
 
@@ -87,6 +87,11 @@ public class JitterService : IJitterService
         _pullDownJitter = new PullDownJitter(PullDownStrength);
     }
 
+    public void SetDelay(int delayMs)
+    {
+        _delay = Math.Max(1, delayMs);
+    }
+
     public void SetSelectedProcess(string processName)
     {
         _selectedProcessName = processName;
@@ -104,7 +109,7 @@ public class JitterService : IJitterService
                 }
 
                 _controllerHandler?.Dispose();
-                _controllerHandler = ControllerDetector.DetectController();
+                _controllerHandler = (ControllerHandler)ControllerDetector.DetectController();
                 _controllerHandler.StartPolling();
                 UseController = true;
             }
@@ -126,7 +131,6 @@ public class JitterService : IJitterService
 
     public void HandleShakeTimerTick()
     {
-        Debug.WriteLine("Timer tick"); // Отладка
 
         var isToggleKeyDown = (NativeMethods.GetAsyncKeyState(_toggleKey) & 0x8000) != 0;
 
@@ -148,7 +152,7 @@ public class JitterService : IJitterService
 
         if (!IsTargetProcessActive())
         {
-            Debug.WriteLine($"Target process {_selectedProcessName} not active");
+           Debug.WriteLine($"Target process {_selectedProcessName} not active");
             return;
         }
 
@@ -170,7 +174,7 @@ public class JitterService : IJitterService
             {
                 shouldApplyJitter = (NativeMethods.GetAsyncKeyState(Win32Constants.VK_LBUTTON) & 0x8000) != 0;
             }
-            Debug.WriteLine($"Should apply jitter: {shouldApplyJitter}");
+           Debug.WriteLine($"Should apply jitter: {shouldApplyJitter}");
         }
         catch (Exception ex)
         {

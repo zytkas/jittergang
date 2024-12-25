@@ -84,13 +84,8 @@ public class SettingsService : ISettingsService
             {
                 WriteIndented = true
             };
-
             string json = JsonSerializer.Serialize(settings, options);
-            Debug.WriteLine($"Saving settings: {json}");
-
-            await File.WriteAllTextAsync(_settingsFilePath, json);
-            Debug.WriteLine("Settings saved successfully");
-        }
+            await File.WriteAllTextAsync(_settingsFilePath, json);        }
         catch (Exception ex)
         {
             Debug.WriteLine($"Error saving settings: {ex}");

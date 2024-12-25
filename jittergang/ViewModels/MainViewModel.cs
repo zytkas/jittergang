@@ -43,9 +43,10 @@ public partial class MainViewModel : ObservableObject
                 ValidateSettings();
                 Debug.WriteLine($"Settings: Strength={Settings.Strength}, " +
                           $"PullDown={Settings.PullDownStrength}, " +
-                          $"Process={Settings.SelectedProcess}");
+                          $"Process={Settings.SelectedProcess}" + $"Delay={Settings.Delay}");
 
                 int keyCode = ConvertKeyNameToCode(Settings.ToggleKey);
+                _jitterService.SetDelay(Settings.Delay); 
                 _jitterService.SetToggleKey(keyCode);
                 _jitterService.UpdateStrength(Settings.Strength);
                 _jitterService.UpdatePullDownStrength(Settings.PullDownStrength);

@@ -9,6 +9,7 @@ public interface IJitterService
     // Настройки джиттера
     void UpdateStrength(int strength);
     void UpdatePullDownStrength(int strength);
+    void SetDelay(int delayMs);
     void UpdateJitters();
     void SetToggleKey(int keyCode);
     //

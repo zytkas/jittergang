@@ -7,7 +7,6 @@
         <UseWindowsForms>true</UseWindowsForms>
         <ImplicitUsings>enable</ImplicitUsings>
         <ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
-        <ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
         <ApplicationIcon>coffee-mug.ico</ApplicationIcon>
     </PropertyGroup>
 
@@ -54,6 +53,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="ViewModels\" />
+      <Folder Include="Services\Input\Win32\" />
     </ItemGroup>
 </Project>
