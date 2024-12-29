@@ -1,8 +1,8 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace JitterGang.Win32;
+namespace JitterGang.libs;
 
-public static class NativeMethods
+internal static class NativeMethods
 {
     [DllImport("user32.dll", SetLastError = true)]
     public static extern uint SendInput(uint nInputs, INPUT[] pInputs, int cbSize);

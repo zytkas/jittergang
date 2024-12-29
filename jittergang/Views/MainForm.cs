@@ -13,10 +13,10 @@ namespace jittergang
             InitializeComponent();
             _viewModel = CreateViewModel();
             InitializeFormState();
-            InitializeViewModelAsync(); 
+            InitializeViewModelAsync();
         }
 
-        private MainViewModel CreateViewModel()
+        private static MainViewModel CreateViewModel()
         {
             var settingsService = new SettingsService();
             var jitterService = new JitterService();
@@ -55,8 +55,15 @@ namespace jittergang
                 "X1", "X2", "Shift", "Capslock"
             });
 
-            if (comboBoxToggleKey.Items.Count > 0)
+
+            if (!string.IsNullOrEmpty(_viewModel.Settings.ToggleKey) && comboBoxToggleKey.Items.Contains(_viewModel.Settings.ToggleKey))
+            {
+                comboBoxToggleKey.SelectedItem = _viewModel.Settings.ToggleKey;
+            }
+            else if (comboBoxToggleKey.Items.Count > 0)
+            {
                 comboBoxToggleKey.SelectedIndex = 0;
+            }
         }
 
         private void SetupNumericUpDowns()
@@ -99,6 +106,9 @@ namespace jittergang
                 true, DataSourceUpdateMode.OnPropertyChanged));
 
             checkBoxAdsOnly.DataBindings.Add(new Binding("Checked", _viewModel.Settings, "UseAdsOnly",
+                true, DataSourceUpdateMode.OnPropertyChanged));
+
+            comboBoxToggleKey.DataBindings.Add(new Binding("SelectedItem", _viewModel.Settings, "ToggleKey",
                 true, DataSourceUpdateMode.OnPropertyChanged));
 
             // Подписываемся на изменение настроек для автоматического сохранения
@@ -254,5 +264,15 @@ namespace jittergang
         }
 
         #endregion
+
+        private void MainForm_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void nightControlBox1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

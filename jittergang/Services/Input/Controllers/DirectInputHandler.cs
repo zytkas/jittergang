@@ -6,7 +6,7 @@ namespace JitterGang.Services.Input.Controllers;
 public class DirectInputHandler : ControllerHandler
 {
     private readonly DirectInput directInput;
-    private Joystick joystick;
+    private Joystick? joystick;
     private readonly Guid joystickGuid;
     private const int ReconnectionDelayMs = 1000;
 
@@ -79,8 +79,8 @@ public class DirectInputHandler : ControllerHandler
     {
         try
         {
-            joystick.Poll();
-            return true;
+            joystick?.Poll();
+            return joystick != null;
         }
         catch (SharpDX.SharpDXException)
         {
@@ -94,5 +94,6 @@ public class DirectInputHandler : ControllerHandler
         joystick?.Unacquire();
         joystick?.Dispose();
         directInput?.Dispose();
+        GC.SuppressFinalize(this);
     }
 }

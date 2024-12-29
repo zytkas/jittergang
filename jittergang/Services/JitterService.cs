@@ -1,9 +1,9 @@
-﻿using System.Diagnostics;
-using System.Runtime.InteropServices;
-using JitterGang.Win32;
-using JitterGang.Services.Input.Controllers;
+﻿using JitterGang.Services.Input.Controllers;
 using JitterGang.Services.Jitter;
 using JitterGang.Services.Timer;
+using JitterGang.libs;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace JitterGang.Services;
 
@@ -13,15 +13,15 @@ public class JitterService : IJitterService
     private int _toggleKey;
     private int _delay;
     private bool _toggleKeyPressed;
-    private string _selectedProcessName;
+    private string? _selectedProcessName;
     private bool _isJitterActivated;
-    private readonly JitterTimer _jitterTimer;
+    private readonly JitterTimer? _jitterTimer;
 
-    private LeftRightJitter _leftRightJitter;
-    private SmoothLeftRightJitter _smoothLeftRightJitter;
-    private CircleJitter _circleJitter;
-    private PullDownJitter _pullDownJitter;
-    private ControllerHandler _controllerHandler;
+    private LeftRightJitter? _leftRightJitter;
+    private SmoothLeftRightJitter? _smoothLeftRightJitter;
+    private CircleJitter? _circleJitter;
+    private PullDownJitter? _pullDownJitter;
+    private ControllerHandler? _controllerHandler;
 
     public int Strength { get; private set; }
     public int PullDownStrength { get; private set; }
@@ -58,7 +58,7 @@ public class JitterService : IJitterService
     {
         _jitterEnabled = false;
         _jitterTimer?.Stop();
-        _isJitterActivated = false; 
+        _isJitterActivated = false;
     }
 
     public void UpdateStrength(int newStrength)
@@ -131,7 +131,6 @@ public class JitterService : IJitterService
 
     public void HandleShakeTimerTick()
     {
-
         var isToggleKeyDown = (NativeMethods.GetAsyncKeyState(_toggleKey) & 0x8000) != 0;
 
         if (isToggleKeyDown && !_toggleKeyPressed)
@@ -146,13 +145,11 @@ public class JitterService : IJitterService
 
         if (!_isJitterActivated || !_jitterEnabled)
         {
-            Debug.WriteLine("Jitter not enabled");
             return;
         }
 
         if (!IsTargetProcessActive())
         {
-           Debug.WriteLine($"Target process {_selectedProcessName} not active");
             return;
         }
 
@@ -161,6 +158,11 @@ public class JitterService : IJitterService
         {
             if (UseController)
             {
+                if (_controllerHandler == null)
+                {
+                    throw new InvalidOperationException("Controller handler is not initialized.");
+                }
+
                 if (UseAdsOnly)
                 {
                     shouldApplyJitter = _controllerHandler.IsRightTriggerPressed && _controllerHandler.IsLeftTriggerPressed;
@@ -174,7 +176,7 @@ public class JitterService : IJitterService
             {
                 shouldApplyJitter = (NativeMethods.GetAsyncKeyState(Win32Constants.VK_LBUTTON) & 0x8000) != 0;
             }
-           Debug.WriteLine($"Should apply jitter: {shouldApplyJitter}");
+            Debug.WriteLine($"Should apply jitter: {shouldApplyJitter}");
         }
         catch (Exception ex)
         {
@@ -227,7 +229,13 @@ public class JitterService : IJitterService
         }
 
         IntPtr foregroundWindow = NativeMethods.GetForegroundWindow();
-        NativeMethods.GetWindowThreadProcessId(foregroundWindow, out int foregroundProcessId);
+        int result = NativeMethods.GetWindowThreadProcessId(foregroundWindow, out int foregroundProcessId);
+
+        if (result == 0)
+        {
+            Debug.WriteLine("Failed to get process ID of the foreground window.");
+            return false;
+        }
 
         var processes = Process.GetProcessesByName(_selectedProcessName);
         return processes.Any(p => p.Id == foregroundProcessId);

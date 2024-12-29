@@ -68,7 +68,7 @@
             // comboBoxProcesses
             // 
             comboBoxProcesses.BackColor = Color.FromArgb(33, 33, 33);
-            comboBoxProcesses.Font = new Font("Segoe UI", 11F);
+            comboBoxProcesses.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxProcesses.ForeColor = Color.White;
             comboBoxProcesses.Location = new Point(63, 37);
             comboBoxProcesses.Name = "comboBoxProcesses";
@@ -80,7 +80,7 @@
             // numericUpDownStrength
             // 
             numericUpDownStrength.BackColor = Color.FromArgb(33, 33, 33);
-            numericUpDownStrength.Font = new Font("Segoe UI", 11F);
+            numericUpDownStrength.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             numericUpDownStrength.ForeColor = Color.White;
             numericUpDownStrength.Location = new Point(102, 97);
             numericUpDownStrength.Name = "numericUpDownStrength";
@@ -91,7 +91,7 @@
             // numericUpDownDelay
             // 
             numericUpDownDelay.BackColor = Color.FromArgb(33, 33, 33);
-            numericUpDownDelay.Font = new Font("Segoe UI", 11F);
+            numericUpDownDelay.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             numericUpDownDelay.ForeColor = Color.White;
             numericUpDownDelay.Location = new Point(102, 156);
             numericUpDownDelay.Name = "numericUpDownDelay";
@@ -121,7 +121,7 @@
             // comboBoxToggleKey
             // 
             comboBoxToggleKey.BackColor = Color.FromArgb(33, 33, 33);
-            comboBoxToggleKey.Font = new Font("Segoe UI", 11F);
+            comboBoxToggleKey.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxToggleKey.ForeColor = Color.White;
             comboBoxToggleKey.Location = new Point(102, 274);
             comboBoxToggleKey.Name = "comboBoxToggleKey";
@@ -215,7 +215,7 @@
             // numericUpDownPullDownStrength
             // 
             numericUpDownPullDownStrength.BackColor = Color.FromArgb(33, 33, 33);
-            numericUpDownPullDownStrength.Font = new Font("Segoe UI", 11F);
+            numericUpDownPullDownStrength.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             numericUpDownPullDownStrength.ForeColor = Color.White;
             numericUpDownPullDownStrength.Location = new Point(102, 215);
             numericUpDownPullDownStrength.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
@@ -241,7 +241,7 @@
             AutoScaleMode = AutoScaleMode.None;
             AutoScroll = true;
             BackColor = Color.FromArgb(33, 33, 33);
-            ClientSize = new Size(318, 489);
+            ClientSize = new Size(327, 504);
             Controls.Add(checkBoxAdsOnly);
             Controls.Add(numericUpDownPullDownStrength);
             Controls.Add(label5);
@@ -258,21 +258,21 @@
             Controls.Add(buttonStart);
             Controls.Add(buttonStop);
             Controls.Add(comboBoxToggleKey);
-            Font = new Font("Segoe UI", 11F);
+            Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            HelpButton = true;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "MainForm";
             SizeGripStyle = SizeGripStyle.Show;
-            Text = "jittergang";
+            Load += MainForm_Load_1;
             ((System.ComponentModel.ISupportInitialize)numericUpDownStrength).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownDelay).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPullDownStrength).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
-
 
         #endregion
     }

@@ -62,5 +62,6 @@ public class XInputHandler : ControllerHandler
     public override void Dispose()
     {
         StopPolling();
+        GC.SuppressFinalize(this);
     }
 }

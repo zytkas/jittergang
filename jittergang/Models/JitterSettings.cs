@@ -51,7 +51,7 @@ public partial class JitterSettings : ObservableObject
         set => SetProperty(ref _isCircleJitterActive, value);
     }
 
-    public bool UseController   
+    public bool UseController
     {
         get => _useController;
         set => SetProperty(ref _useController, value);

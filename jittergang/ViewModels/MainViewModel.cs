@@ -27,7 +27,7 @@ public partial class MainViewModel : ObservableObject
     public MainViewModel(ISettingsService settingsService, IJitterService jitterService)
     {
         _settingsService = settingsService;
-        _jitterService = jitterService;
+        _jitterService = jitterService; 
 
         _processes = new ObservableCollection<string>();
         _settings = new JitterSettings();
@@ -41,12 +41,9 @@ public partial class MainViewModel : ObservableObject
             if (!IsRunning)
             {
                 ValidateSettings();
-                Debug.WriteLine($"Settings: Strength={Settings.Strength}, " +
-                          $"PullDown={Settings.PullDownStrength}, " +
-                          $"Process={Settings.SelectedProcess}" + $"Delay={Settings.Delay}");
 
                 int keyCode = ConvertKeyNameToCode(Settings.ToggleKey);
-                _jitterService.SetDelay(Settings.Delay); 
+                _jitterService.SetDelay(Settings.Delay);
                 _jitterService.SetToggleKey(keyCode);
                 _jitterService.UpdateStrength(Settings.Strength);
                 _jitterService.UpdatePullDownStrength(Settings.PullDownStrength);
@@ -88,10 +85,9 @@ public partial class MainViewModel : ObservableObject
             var loadedSettings = await _settingsService.LoadSettingsAsync();
             if (loadedSettings != null)
             {
-                Settings = loadedSettings; // Заменяем на загруженные настройки
+                Settings = loadedSettings;
             }
 
-            // Применяем настройки к сервису
             _jitterService.UpdateStrength(Settings.Strength);
             _jitterService.UpdatePullDownStrength(Settings.PullDownStrength);
             _jitterService.IsCircleJitterActive = Settings.IsCircleJitterActive;
@@ -142,15 +138,17 @@ public partial class MainViewModel : ObservableObject
     {
         try
         {
-            var processList = Process.GetProcesses()
-                .Select(p => p.ProcessName)
-                .Distinct()
-                .OrderBy(name => name)
-                .ToList();
+            var processList = await Task.Run(() =>
+            {
+                return Process.GetProcesses()
+                    .Select(p => p.ProcessName)
+                    .Distinct()
+                    .OrderBy(name => name)
+                    .ToList();
+            });
 
             // Создаем новую коллекцию вместо очистки существующей
-            var newProcesses = new ObservableCollection<string>(processList);
-            Processes = newProcesses; // Это вызовет уведомление об изменении
+            Processes = new ObservableCollection<string>(processList); // Это вызовет уведомление об изменении
 
             // Сохраняем текущий выбранный процесс
             if (!string.IsNullOrEmpty(Settings.SelectedProcess) &&

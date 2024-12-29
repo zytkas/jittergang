@@ -3,7 +3,7 @@
 public class JitterTimer : ITimer
 {
     private readonly IJitterService _jitterService;
-    private HighPrecisionTimer _timer;
+    private HighPrecisionTimer? _timer;
 
     public bool IsRunning => _timer?.IsRunning ?? false;
 
@@ -21,7 +21,7 @@ public class JitterTimer : ITimer
 
     public void Stop()
     {
-        if (_timer != null)
+        if (_timer is not null)
         {
             _timer.Stop();
             _timer.Dispose();
@@ -32,5 +32,6 @@ public class JitterTimer : ITimer
     public void Dispose()
     {
         Stop();
+        GC.SuppressFinalize(this);
     }
 }

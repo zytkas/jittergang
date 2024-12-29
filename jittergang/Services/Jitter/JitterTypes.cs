@@ -1,4 +1,4 @@
-﻿using JitterGang.Win32;
+﻿using JitterGang.libs;
 
 namespace JitterGang.Services.Jitter;
 

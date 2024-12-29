@@ -8,7 +8,7 @@ public class HighPrecisionTimer : ITimer
     private long _intervalTicks;
     private readonly Stopwatch _stopwatch;
     private readonly CancellationTokenSource _cts;
-    private Task _timerTask;
+    private Task? _timerTask;
 
     public bool IsRunning => _timerTask != null && !_timerTask.IsCompleted;
 
@@ -82,5 +82,6 @@ public class HighPrecisionTimer : ITimer
     {
         Stop();
         _cts.Dispose();
+        GC.SuppressFinalize(this);
     }
 }
