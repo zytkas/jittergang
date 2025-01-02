@@ -1,4 +1,5 @@
-﻿using JitterGang.Services;
+﻿using JitterGang.Models;
+using JitterGang.Services;
 using JitterGang.ViewModels;
 using System.Diagnostics;
 
@@ -111,10 +112,16 @@ namespace jittergang
             comboBoxToggleKey.DataBindings.Add(new Binding("SelectedItem", _viewModel.Settings, "ToggleKey",
                 true, DataSourceUpdateMode.OnPropertyChanged));
 
+            checkBox1.DataBindings.Add(new Binding("Checked", _viewModel.Settings, "UseController",
+                true, DataSourceUpdateMode.OnPropertyChanged));
+
             // Подписываемся на изменение настроек для автоматического сохранения
             _viewModel.Settings.PropertyChanged += async (s, e) =>
             {
-                await _viewModel.SaveSettingsAsync();
+                if (e.PropertyName == nameof(JitterSettings.UseController))
+                {
+                    await _viewModel.SaveSettingsAsync();
+                }
             };
         }
 
@@ -132,14 +139,7 @@ namespace jittergang
         {
             try
             {
-                Debug.WriteLine("Starting form initialization");
                 await _viewModel.InitializeAsync();
-                Debug.WriteLine("Form initialization completed");
-
-                // Проверяем загруженные значения
-                Debug.WriteLine($"Current settings after load: " +
-                               $"Strength={_viewModel.Settings.Strength}, " +
-                               $"PullDown={_viewModel.Settings.PullDownStrength}");
             }
             catch (Exception ex)
             {

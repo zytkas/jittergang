@@ -44,13 +44,11 @@ public class JitterService : IJitterService
 
     public void Start()
     {
-        Debug.WriteLine("JitterService.Start called");
         _jitterEnabled = true;
         if (_jitterTimer != null)
         {
             var interval = TimeSpan.FromMilliseconds(_delay);
             _jitterTimer.Start(interval);
-            Debug.WriteLine($"Timer started with interval: {interval.TotalMilliseconds}ms");
         }
     }
 
@@ -105,6 +103,7 @@ public class JitterService : IJitterService
             {
                 if (!ControllerDetector.IsAnyControllerConnected())
                 {
+                    UseController = false;
                     throw new InvalidOperationException("No controller connected. Please connect a controller and try again.");
                 }
 
@@ -122,6 +121,7 @@ public class JitterService : IJitterService
         }
         catch (Exception ex)
         {
+            // Only reset controller-related state
             UseController = false;
             _controllerHandler?.Dispose();
             _controllerHandler = null;
@@ -172,27 +172,34 @@ public class JitterService : IJitterService
                     shouldApplyJitter = _controllerHandler.IsRightTriggerPressed;
                 }
             }
-            else
+            else // Only check mouse input if not using controller
             {
-                shouldApplyJitter = (NativeMethods.GetAsyncKeyState(Win32Constants.VK_LBUTTON) & 0x8000) != 0;
+                if (UseAdsOnly)
+                {
+                    bool isLeftMouseDown = (NativeMethods.GetAsyncKeyState(Win32Constants.VK_LBUTTON) & 0x8000) != 0;
+                    bool isRightMouseDown = (NativeMethods.GetAsyncKeyState(Win32Constants.VK_RBUTTON) & 0x8000) != 0;
+                    shouldApplyJitter = isLeftMouseDown && isRightMouseDown;
+                }
+                else
+                {
+                    shouldApplyJitter = (NativeMethods.GetAsyncKeyState(Win32Constants.VK_LBUTTON) & 0x8000) != 0;
+                }
             }
-            Debug.WriteLine($"Should apply jitter: {shouldApplyJitter}");
         }
         catch (Exception ex)
         {
-            throw new InvalidOperationException("Error checking controller state", ex);
+            throw new InvalidOperationException("Error checking input state", ex);
         }
 
         if (shouldApplyJitter)
         {
-            Debug.WriteLine("Applying jitter");
             ApplyJitter();
         }
     }
 
     private void ApplyJitter()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 15; i++)
         {
             var inputs = new INPUT[1];
             inputs[0].Type = Win32Constants.INPUT_MOUSE;

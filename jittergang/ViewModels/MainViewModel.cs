@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using JitterGang.Models;
 using JitterGang.Services;
+using JitterGang.Services.Input.Controllers;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 
@@ -83,9 +84,18 @@ public partial class MainViewModel : ObservableObject
         try
         {
             var loadedSettings = await _settingsService.LoadSettingsAsync();
+
+
             if (loadedSettings != null)
             {
                 Settings = loadedSettings;
+            }
+
+            bool isControllerAvailable = ControllerDetector.IsAnyControllerConnected();
+            if (!isControllerAvailable)
+            {
+                Settings.UseController = false;
+                await SaveSettingsAsync();
             }
 
             _jitterService.UpdateStrength(Settings.Strength);
@@ -93,7 +103,7 @@ public partial class MainViewModel : ObservableObject
             _jitterService.IsCircleJitterActive = Settings.IsCircleJitterActive;
             _jitterService.UseAdsOnly = Settings.UseAdsOnly;
 
-            if (Settings.UseController)
+            if (Settings.UseController && isControllerAvailable)
             {
                 _jitterService.SetUseController(true);
             }
@@ -141,6 +151,30 @@ public partial class MainViewModel : ObservableObject
             var processList = await Task.Run(() =>
             {
                 return Process.GetProcesses()
+                    .Where(p => {
+                        try
+                        {
+                            // Проверяем есть ли у процесса главное окно
+                            if (p.MainWindowHandle == IntPtr.Zero) return false;
+
+                            // Исключаем системные процессы
+                            string[] excludedProcesses = {
+                                "svchost", "csrss", "smss", "services", "lsass",
+                                "winlogon", "spoolsv", "explorer", "taskmgr",
+                                "devenv", "conhost", "RuntimeBroker", "SearchUI",
+                                "ShellExperienceHost", "sihost", "ApplicationFrameHost"
+                            };
+
+                            if (excludedProcesses.Contains(p.ProcessName.ToLower())) return false;
+
+                            // Проверяем, что процесс отвечает и имеет заголовок окна
+                            return !p.HasExited && !string.IsNullOrEmpty(p.MainWindowTitle);
+                        }
+                        catch
+                        {
+                            return false;
+                        }
+                    })
                     .Select(p => p.ProcessName)
                     .Distinct()
                     .OrderBy(name => name)
@@ -200,13 +234,17 @@ public partial class MainViewModel : ObservableObject
     {
         try
         {
-            _jitterService.SetUseController(useController);
+            if (useController)
+            {
+                _jitterService.SetUseController(useController);
+            }
             Settings.UseController = useController;
             await SaveSettingsAsync();
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            Debug.WriteLine($"Error updating controller state: {ex.Message}");
+            Settings.UseController = false;
+            await SaveSettingsAsync();
             throw;
         }
     }

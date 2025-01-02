@@ -26,7 +26,7 @@ public class HighPrecisionTimer : ITimer
             throw new InvalidOperationException("Timer is already running.");
         }
 
-        _intervalTicks = (long)(interval.TotalSeconds * Stopwatch.Frequency);
+        _intervalTicks = (long)(interval.TotalSeconds * Stopwatch.Frequency) / 2;
         _stopwatch.Start();
         _timerTask = Task.Run(TimerLoopAsync, _cts.Token);
     }
@@ -51,7 +51,7 @@ public class HighPrecisionTimer : ITimer
     private async Task TimerLoopAsync()
     {
         long nextTick = _stopwatch.ElapsedTicks;
-        long minWaitTicks = Stopwatch.Frequency / 1000;
+        long minWaitTicks = Stopwatch.Frequency / 2000;
 
         while (!_cts.Token.IsCancellationRequested)
         {

@@ -55,14 +55,9 @@ public class CircleJitter : BaseJitter
 
 public class SmoothLeftRightJitter : BaseJitter
 {
-    private const int BaseRadius = 2;
-    private const double BaseAngleIncrement = 0.09;
+    private const int Radius = 2;
+    private const double AngleIncrement = 0.09;
     private double _angle;
-    private double _previousDeltaX;
-    private double _previousDeltaY;
-    private const double SmoothingFactor = 0.5;
-    private const double AdaptiveRadiusFactor = 0.1;
-    private double _dynamicRadius = BaseRadius;
 
     public SmoothLeftRightJitter()
     {
@@ -71,23 +66,13 @@ public class SmoothLeftRightJitter : BaseJitter
 
     public override void ApplyJitter(ref INPUT input)
     {
-        _dynamicRadius = BaseRadius + AdaptiveRadiusFactor * (Math.Abs(_previousDeltaX) + Math.Abs(_previousDeltaY));
+        double deltaX = Radius * Math.Cos(_angle);
+        double deltaY = Radius * Math.Sin(_angle);
 
-        double currentDeltaX = _dynamicRadius * Math.Cos(_angle);
-        double currentDeltaY = _dynamicRadius * Math.Sin(_angle);
+        input.Mi.Dx += (int)Math.Round(deltaX);
+        input.Mi.Dy += (int)Math.Round(deltaY);
 
-        double smoothDeltaX = (currentDeltaX * SmoothingFactor) + (_previousDeltaX * (1 - SmoothingFactor));
-        double smoothDeltaY = (currentDeltaY * SmoothingFactor) + (_previousDeltaY * (1 - SmoothingFactor));
-
-        input.Mi.Dx += (int)Math.Round(smoothDeltaX);
-        input.Mi.Dy += (int)Math.Round(smoothDeltaY);
-
-        _previousDeltaX = smoothDeltaX;
-        _previousDeltaY = smoothDeltaY;
-
-        double adaptiveAngleIncrement = BaseAngleIncrement + 0.01 * Math.Sin(_angle);
-        _angle += adaptiveAngleIncrement;
-
+        _angle += AngleIncrement;
         if (_angle >= 2 * Math.PI)
         {
             _angle -= 2 * Math.PI;
