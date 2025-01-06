@@ -267,10 +267,39 @@ namespace jittergang
 
         private void MainForm_Load_1(object sender, EventArgs e)
         {
-
+           
         }
 
         private void nightControlBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void separator1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void airSeparator1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void materialSlider1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void hopeCheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
         {
 
         }

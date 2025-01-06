@@ -7,8 +7,8 @@ public class LeftRightJitter : BaseJitter
     private readonly int _strength;
     private int _currentDirection = 1;
     private int _moveCount;
-    private const int MovesPerDirection = 10;
-    private const int MicroStrength = 1;
+    private const int MovesPerDirection = 8; // Reduced from 10 for faster direction changes
+    private const double StrengthMultiplier = 0.5; // Multiplier for strength to make movements more noticeable
 
     public LeftRightJitter(int strength)
     {
@@ -17,13 +17,14 @@ public class LeftRightJitter : BaseJitter
 
     public override void ApplyJitter(ref INPUT input)
     {
-        int microMove = Math.Min(MicroStrength, _strength);
-        input.Mi.Dx += microMove * _currentDirection;
+        // Calculate movement based on strength
+        int moveAmount = (int)Math.Ceiling(_strength * StrengthMultiplier);
+        input.Mi.Dx += moveAmount * _currentDirection;
 
         _moveCount++;
         if (_moveCount >= MovesPerDirection)
         {
-            _currentDirection *= -1;
+            _currentDirection *= -1; // Change direction
             _moveCount = 0;
         }
     }
@@ -82,25 +83,26 @@ public class SmoothLeftRightJitter : BaseJitter
 
 public class PullDownJitter : BaseJitter
 {
+    private readonly double _baseStrength = 0.01; // Base movement per tick
     private int _strength;
-    private int _accumulatedStrength;
+    private double _accumulatedMovement;
 
     public PullDownJitter(int strength)
     {
         _strength = strength;
-        _accumulatedStrength = 0;
     }
 
     public override void ApplyJitter(ref INPUT input)
     {
-        float weakenedStrength = _strength / 60.0f;
-        _accumulatedStrength += (int)(weakenedStrength * 100);
+        // Calculate movement this tick
+        _accumulatedMovement += _strength * _baseStrength;
 
-        if (_accumulatedStrength >= 100)
+        // When we accumulate >= 1 pixel of movement, apply it
+        if (_accumulatedMovement >= 1.0)
         {
-            int pixelsToMove = _accumulatedStrength / 100;
+            int pixelsToMove = (int)Math.Floor(_accumulatedMovement);
             input.Mi.Dy += pixelsToMove;
-            _accumulatedStrength %= 100;
+            _accumulatedMovement -= pixelsToMove;
         }
     }
 

@@ -122,10 +122,10 @@
     <value>Segoe UI, 11pt</value>
   </data>
   <data name="comboBoxProcesses.Location" type="System.Drawing.Point, System.Drawing">
-    <value>359, 45</value>
+    <value>30, 115</value>
   </data>
   <data name="comboBoxProcesses.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 28</value>
+    <value>241, 28</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="comboBoxProcesses.TabIndex" type="System.Int32, mscorlib">
@@ -141,82 +141,214 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;comboBoxProcesses.ZOrder" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>58, 95</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 17</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="numericUpDownStrength.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 11pt</value>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Process
+</value>
   </data>
-  <data name="numericUpDownStrength.Location" type="System.Drawing.Point, System.Drawing">
-    <value>398, 105</value>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
   </data>
-  <data name="numericUpDownStrength.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 27</value>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="numericUpDownStrength.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownStrength.Name" xml:space="preserve">
-    <value>numericUpDownStrength</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownStrength.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownStrength.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;numericUpDownStrength.ZOrder" xml:space="preserve">
-    <value>11</value>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>22</value>
   </data>
-  <data name="numericUpDownDelay.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 11pt</value>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>131, 17</value>
+  </metadata>
+  <data name="label6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="numericUpDownDelay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>398, 164</value>
+  <data name="label6.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Ubuntu Mono, 16pt</value>
   </data>
-  <data name="numericUpDownDelay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 27</value>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>58, 29</value>
   </data>
-  <data name="numericUpDownDelay.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 23</value>
   </data>
-  <data name="&gt;&gt;numericUpDownDelay.Name" xml:space="preserve">
-    <value>numericUpDownDelay</value>
+  <data name="label6.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
   </data>
-  <data name="&gt;&gt;numericUpDownDelay.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="label6.Text" xml:space="preserve">
+    <value>JitterGang</value>
   </data>
-  <data name="&gt;&gt;numericUpDownDelay.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label6.Name" xml:space="preserve">
+    <value>label6</value>
+  </data>
+  <data name="&gt;&gt;label6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;numericUpDownDelay.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="buttonStart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>359, 418</value>
+  <data name="airSeparator1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Verdana, 8pt</value>
   </data>
-  <data name="buttonStart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 26</value>
+  <data name="airSeparator1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 70</value>
   </data>
-  <data name="buttonStart.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="airSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 1</value>
   </data>
-  <data name="buttonStart.Text" xml:space="preserve">
-    <value>Start</value>
+  <data name="airSeparator1.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
   </data>
-  <data name="&gt;&gt;buttonStart.Name" xml:space="preserve">
-    <value>buttonStart</value>
+  <data name="airSeparator1.Text" xml:space="preserve">
+    <value> </value>
   </data>
-  <data name="&gt;&gt;buttonStart.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;airSeparator1.Name" xml:space="preserve">
+    <value>airSeparator1</value>
   </data>
-  <data name="&gt;&gt;buttonStart.Parent" xml:space="preserve">
+  <data name="&gt;&gt;airSeparator1.Type" xml:space="preserve">
+    <value>ReaLTaiizor.Controls.AirSeparator, ReaLTaiizor, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;airSeparator1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;buttonStart.ZOrder" xml:space="preserve">
-    <value>13</value>
+  <data name="&gt;&gt;airSeparator1.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="hopePictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAjVJREFUSEvd
+        VM+rTVEUPn6kePfes5WBZMJMSMRASm+oTEmSIsp/gIla+7wBovwRBnQN1Xt7n/ty8l4ykZ54EXpKKWXy
+        8nt2fWvv78pzzrnn3pHy1eru9Z317fVj732T/xx9WW2cPWuczKfeLuH3m1pc2zn9lvT7qxg9Hkwv25t6
+        eWm87Q81Z18Yl+2hbDS08+wQhJ+5yYJW2vKyKymkpTbRy3aji3PGy3PGLLdnsoOUD0c6K9sh+K7CNLfX
+        SNcCSW6FJGF0U9tI1wNjuRerktukGoFu7oaCvNwhVY00l/3c/Eu7kE2kGzFRyGboYtdO9pEuAxXcYNB1
+        UiMjdfZmoxZzfKZBONDDpEaGmZHJmMA+JVUGAr4i4GfS7a5RHx0dg/8qGNYhCKjkC1mL9Q/ssRz8KvAR
+        faSr/qJWFQxr0rU8xvNJrzfdMiAIB2UKMcEfI0E6f3Vj9IcmkEcahErOqx9HIW+qR7SSx5u5wARzIagK
+        JpczMQEOCjMl3YxFWQfdgmo7zp4mW4FwUPZJSOJtV//s+CV803GAf7Aiuf4herkfNfJ4cEFqsX5atobD
+        UkFuj5NOOrk9qVyo0ttTpDEueyLEQrMhly2khwMVfaDo96tE60dDAty0jpMjpJPObHaAid+TagaqWlJR
+        qze1g1QtWi7bGYrx9jWpZuCQL7EqrbggXQI6fTiIQ7cXSY8GzPwKNn+nYlIlxI3tWxzuZVLjQW/NoMJa
+        ++MBjo3Bg6rcGPb3A/wHSJJf/QacaQBIL4cAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="hopePictureBox1.InitialImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAllJREFUWEft
+        lr9rFEEUx1eMhZhwnNnZ64SIPwpRxEtm5sQilSCojZxg5O5mVgkiFpLG/AOChf4PioV2CcQQtJD4qxEr
+        sVASAiLaJimUSBT9zuyb2ZDLnVfsBov9wIPdN+/X7M57u0FBQSf6TzYixtUdJtQ7JvQKk2ouEup6ENR3
+        kkl+hFyNRUJ/j6T+s1lQzMfKSLyfTLOnxBtDkVQ/0oRq1T4Fqde9TqrXMN2ReGQMdv7QJQqFugmVTTTA
+        m4Mo5Klfk63zRp85SPLJ7hK7JpWH1a4c8AVw9dNd9yJ4ar8Q8xGF6gyMlhMHPUMqT+VYY08asD1JD7JG
+        oTqDAl4mxupzMDraR2oLE/EpFww7eosi5nsVdNCzkOuzFKozeLeXXRI4TbERdZwdqfeHUp3D/ZJNjqc0
+        UL0Ukkv2IMkbX8RWwtU1Ms2H0tGxMnb5ZIvka9QZ2wOT8RmchXv2VUh1C0UdpKWC/5dwOD6MVzWJiToN
+        uRuJ1mlayh+06gTOS/uExBkqV8dLZJYPpjvaEm8QfEVfwSyfD1i52tznvqDolkXTPcnw0icwBWd8EVzf
+        IJfuDEotjOPGUdpVhF5wSYwvhUnAOIfN16Q4PU/a7sDwvgvYi+DQ+eugOr6LwniwPkt2y6TqDpOti+Y3
+        zAX9l8A2vRdXKxTGA70d7djYAqmyBa12wRWAM3Cb1Ja9vFkz/wJ2TejHpM6YWn03Wu2DKwIH8n1yNtQL
+        JP2dFKbXQx4Pk0f2hLx5CMm+pEWkYpJDWmSaH2bYoIgHphXNQMIT+Ib75+afgkwKCjYRBH8BUZFxEgdi
+        YMsAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="hopePictureBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 28</value>
+  </data>
+  <data name="hopePictureBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="hopePictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>AutoSize</value>
+  </data>
+  <data name="hopePictureBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="&gt;&gt;hopePictureBox1.Name" xml:space="preserve">
+    <value>hopePictureBox1</value>
+  </data>
+  <data name="&gt;&gt;hopePictureBox1.Type" xml:space="preserve">
+    <value>ReaLTaiizor.Controls.HopePictureBox, ReaLTaiizor, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;hopePictureBox1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;hopePictureBox1.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="hopePictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAXJJREFUOE/V
+        VLtKA0EUHR9g5c78gqi9kA9QEBsRtBEsRUWwSOGj0uZOFn/AP1C7fIDuDIYEMY2VVQprG38gPsl67u5d
+        4yOCu2KRA5fdPXPuY+6dWdV/MOc0YyK7q51dDyKaELoAqtUh46hpnI0zQ9AOntuiyAdUtShBbo2nVR3R
+        oXb0wKZiGhTZ7wHHPQ4YeJoXSqHiY0nyXvVXg9+L9nZZXLrAwmYqsFtCIaBtMIdeXsr7N9ORvcCOpsSl
+        i8CHk1h8xVafsP0TiK9gqIKaIsmPwNEKgrTTQIndaBeOyXJBnB2NaFcp6Vo4ruJ4QNh/BJJwMk7KyYUt
+        BkxzFm24y1qCnj+i5/uynB84AS0JhoHRKb6fYZ2kPb0A0ZKJqA6HXkckmTqO0LXIMURbZg5+a0J9BrId
+        pIKfDRovctbPJbynHaFyoE7DcG7jAtxzRXxV8V7jgKOOFkSVD1xJVukHa/zpePEvDZPd4F+c8ZVpofsG
+        Sr0B8t74fvl2s2kAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="hopePictureBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 91</value>
+  </data>
+  <data name="hopePictureBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 20</value>
+  </data>
+  <data name="hopePictureBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="&gt;&gt;hopePictureBox2.Name" xml:space="preserve">
+    <value>hopePictureBox2</value>
+  </data>
+  <data name="&gt;&gt;hopePictureBox2.Type" xml:space="preserve">
+    <value>ReaLTaiizor.Controls.HopePictureBox, ReaLTaiizor, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;hopePictureBox2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;hopePictureBox2.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="comboBoxToggleKey.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11pt</value>
+  </data>
+  <data name="comboBoxToggleKey.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 435</value>
+  </data>
+  <data name="comboBoxToggleKey.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 28</value>
+  </data>
+  <data name="comboBoxToggleKey.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;comboBoxToggleKey.Name" xml:space="preserve">
+    <value>comboBoxToggleKey</value>
+  </data>
+  <data name="&gt;&gt;comboBoxToggleKey.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxToggleKey.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;comboBoxToggleKey.ZOrder" xml:space="preserve">
+    <value>28</value>
+  </data>
+  <data name="buttonStop.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="buttonStop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>483, 418</value>
+    <value>196, 593</value>
   </data>
   <data name="buttonStop.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 26</value>
@@ -237,68 +369,94 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonStop.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>27</value>
   </data>
-  <data name="comboBoxToggleKey.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="buttonStart.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonStart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>53, 593</value>
+  </data>
+  <data name="buttonStart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 26</value>
+  </data>
+  <data name="buttonStart.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="buttonStart.Text" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="&gt;&gt;buttonStart.Name" xml:space="preserve">
+    <value>buttonStart</value>
+  </data>
+  <data name="&gt;&gt;buttonStart.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonStart.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;buttonStart.ZOrder" xml:space="preserve">
+    <value>26</value>
+  </data>
+  <data name="numericUpDownDelay.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 11pt</value>
   </data>
-  <data name="comboBoxToggleKey.Location" type="System.Drawing.Point, System.Drawing">
-    <value>398, 282</value>
+  <data name="numericUpDownDelay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 275</value>
   </data>
-  <data name="comboBoxToggleKey.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 28</value>
+  <data name="numericUpDownDelay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 27</value>
   </data>
-  <data name="comboBoxToggleKey.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+  <data name="numericUpDownDelay.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="&gt;&gt;comboBoxToggleKey.Name" xml:space="preserve">
-    <value>comboBoxToggleKey</value>
+  <data name="&gt;&gt;numericUpDownDelay.Name" xml:space="preserve">
+    <value>numericUpDownDelay</value>
   </data>
-  <data name="&gt;&gt;comboBoxToggleKey.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;numericUpDownDelay.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;comboBoxToggleKey.Parent" xml:space="preserve">
+  <data name="&gt;&gt;numericUpDownDelay.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;comboBoxToggleKey.ZOrder" xml:space="preserve">
-    <value>15</value>
+  <data name="&gt;&gt;numericUpDownDelay.ZOrder" xml:space="preserve">
+    <value>25</value>
   </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="numericUpDownStrength.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11pt</value>
   </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>429, 19</value>
+  <data name="numericUpDownStrength.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 195</value>
   </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 20</value>
+  <data name="numericUpDownStrength.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 27</value>
   </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+  <data name="numericUpDownStrength.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Process
-</value>
+  <data name="&gt;&gt;numericUpDownStrength.Name" xml:space="preserve">
+    <value>numericUpDownStrength</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
+  <data name="&gt;&gt;numericUpDownStrength.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;numericUpDownStrength.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>9</value>
+  <data name="&gt;&gt;numericUpDownStrength.ZOrder" xml:space="preserve">
+    <value>24</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>426, 79</value>
+    <value>58, 175</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 20</value>
+    <value>64, 17</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -316,16 +474,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>21</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>435, 138</value>
+    <value>58, 255</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 20</value>
+    <value>43, 17</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -343,16 +504,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>20</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>411, 256</value>
+    <value>58, 415</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 20</value>
+    <value>85, 17</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -370,22 +534,25 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>19</value>
   </data>
   <data name="linkLabel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="linkLabel1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="linkLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>408, 464</value>
+    <value>102, 632</value>
   </data>
   <data name="linkLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 20</value>
+    <value>106, 17</value>
   </data>
   <data name="linkLabel1.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
   <data name="linkLabel1.Text" xml:space="preserve">
-    <value>made by zytka</value>
+    <value>made by zytka_</value>
   </data>
   <data name="&gt;&gt;linkLabel1.Name" xml:space="preserve">
     <value>linkLabel1</value>
@@ -397,19 +564,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;linkLabel1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>18</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>131, 17</value>
-  </metadata>
   <data name="checkBox2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="checkBox2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="checkBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 316</value>
+    <value>58, 505</value>
   </data>
   <data name="checkBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 24</value>
+    <value>111, 21</value>
   </data>
   <data name="checkBox2.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -427,16 +594,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;checkBox2.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>17</value>
   </data>
   <data name="checkBox1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="checkBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="checkBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>412, 346</value>
+    <value>58, 532</value>
   </data>
   <data name="checkBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 24</value>
+    <value>104, 21</value>
   </data>
   <data name="checkBox1.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -454,16 +624,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;checkBox1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>16</value>
   </data>
   <data name="label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>423, 197</value>
+    <value>58, 335</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 20</value>
+    <value>64, 17</value>
   </data>
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -481,16 +654,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>15</value>
   </data>
   <data name="numericUpDownPullDownStrength.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 11pt</value>
   </data>
   <data name="numericUpDownPullDownStrength.Location" type="System.Drawing.Point, System.Drawing">
-    <value>398, 223</value>
+    <value>30, 355</value>
   </data>
   <data name="numericUpDownPullDownStrength.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 27</value>
+    <value>241, 27</value>
   </data>
   <data name="numericUpDownPullDownStrength.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -505,16 +678,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;numericUpDownPullDownStrength.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>14</value>
   </data>
   <data name="checkBoxAdsOnly.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="checkBoxAdsOnly.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="checkBoxAdsOnly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>418, 378</value>
+    <value>58, 559</value>
   </data>
   <data name="checkBoxAdsOnly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 24</value>
+    <value>83, 21</value>
   </data>
   <data name="checkBoxAdsOnly.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -532,6 +708,249 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;checkBoxAdsOnly.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="foxLabel1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Bold</value>
+  </data>
+  <data name="foxLabel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 0</value>
+  </data>
+  <data name="foxLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1, 600</value>
+  </data>
+  <data name="foxLabel1.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="foxLabel1.Text" xml:space="preserve">
+    <value>foxLabel1</value>
+  </data>
+  <data name="&gt;&gt;foxLabel1.Name" xml:space="preserve">
+    <value>foxLabel1</value>
+  </data>
+  <data name="&gt;&gt;foxLabel1.Type" xml:space="preserve">
+    <value>ReaLTaiizor.Controls.FoxLabel, ReaLTaiizor, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;foxLabel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;foxLabel1.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="foxLabel2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Bold</value>
+  </data>
+  <data name="foxLabel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>270, 0</value>
+  </data>
+  <data name="foxLabel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1, 600</value>
+  </data>
+  <data name="foxLabel2.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="foxLabel2.Text" xml:space="preserve">
+    <value>foxLabel2</value>
+  </data>
+  <data name="&gt;&gt;foxLabel2.Name" xml:space="preserve">
+    <value>foxLabel2</value>
+  </data>
+  <data name="&gt;&gt;foxLabel2.Type" xml:space="preserve">
+    <value>ReaLTaiizor.Controls.FoxLabel, ReaLTaiizor, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;foxLabel2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;foxLabel2.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="foxLabel3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Bold</value>
+  </data>
+  <data name="foxLabel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>53, 0</value>
+  </data>
+  <data name="foxLabel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1, 600</value>
+  </data>
+  <data name="foxLabel3.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="foxLabel3.Text" xml:space="preserve">
+    <value>foxLabel3</value>
+  </data>
+  <data name="&gt;&gt;foxLabel3.Name" xml:space="preserve">
+    <value>foxLabel3</value>
+  </data>
+  <data name="&gt;&gt;foxLabel3.Type" xml:space="preserve">
+    <value>ReaLTaiizor.Controls.FoxLabel, ReaLTaiizor, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;foxLabel3.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;foxLabel3.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="airSeparator2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Verdana, 8pt</value>
+  </data>
+  <data name="airSeparator2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 85</value>
+  </data>
+  <data name="airSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 1</value>
+  </data>
+  <data name="airSeparator2.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="airSeparator2.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="&gt;&gt;airSeparator2.Name" xml:space="preserve">
+    <value>airSeparator2</value>
+  </data>
+  <data name="&gt;&gt;airSeparator2.Type" xml:space="preserve">
+    <value>ReaLTaiizor.Controls.AirSeparator, ReaLTaiizor, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;airSeparator2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;airSeparator2.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="airSeparator3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Verdana, 8pt</value>
+  </data>
+  <data name="airSeparator3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 165</value>
+  </data>
+  <data name="airSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 1</value>
+  </data>
+  <data name="airSeparator3.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="airSeparator3.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="&gt;&gt;airSeparator3.Name" xml:space="preserve">
+    <value>airSeparator3</value>
+  </data>
+  <data name="&gt;&gt;airSeparator3.Type" xml:space="preserve">
+    <value>ReaLTaiizor.Controls.AirSeparator, ReaLTaiizor, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;airSeparator3.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;airSeparator3.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="airSeparator4.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Verdana, 8pt</value>
+  </data>
+  <data name="airSeparator4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 245</value>
+  </data>
+  <data name="airSeparator4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 1</value>
+  </data>
+  <data name="airSeparator4.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="airSeparator4.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="&gt;&gt;airSeparator4.Name" xml:space="preserve">
+    <value>airSeparator4</value>
+  </data>
+  <data name="&gt;&gt;airSeparator4.Type" xml:space="preserve">
+    <value>ReaLTaiizor.Controls.AirSeparator, ReaLTaiizor, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;airSeparator4.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;airSeparator4.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="airSeparator5.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Verdana, 8pt</value>
+  </data>
+  <data name="airSeparator5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 405</value>
+  </data>
+  <data name="airSeparator5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 1</value>
+  </data>
+  <data name="airSeparator5.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="airSeparator5.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="&gt;&gt;airSeparator5.Name" xml:space="preserve">
+    <value>airSeparator5</value>
+  </data>
+  <data name="&gt;&gt;airSeparator5.Type" xml:space="preserve">
+    <value>ReaLTaiizor.Controls.AirSeparator, ReaLTaiizor, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;airSeparator5.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;airSeparator5.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="airSeparator6.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Verdana, 8pt</value>
+  </data>
+  <data name="airSeparator6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 325</value>
+  </data>
+  <data name="airSeparator6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 1</value>
+  </data>
+  <data name="airSeparator6.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="airSeparator6.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="&gt;&gt;airSeparator6.Name" xml:space="preserve">
+    <value>airSeparator6</value>
+  </data>
+  <data name="&gt;&gt;airSeparator6.Type" xml:space="preserve">
+    <value>ReaLTaiizor.Controls.AirSeparator, ReaLTaiizor, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;airSeparator6.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;airSeparator6.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="airSeparator7.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Verdana, 8pt</value>
+  </data>
+  <data name="airSeparator7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 485</value>
+  </data>
+  <data name="airSeparator7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 1</value>
+  </data>
+  <data name="airSeparator7.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="airSeparator7.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="&gt;&gt;airSeparator7.Name" xml:space="preserve">
+    <value>airSeparator7</value>
+  </data>
+  <data name="&gt;&gt;airSeparator7.Type" xml:space="preserve">
+    <value>ReaLTaiizor.Controls.AirSeparator, ReaLTaiizor, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;airSeparator7.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;airSeparator7.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -544,10 +963,10 @@
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>594, 504</value>
+    <value>302, 658</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 11pt</value>
+    <value>Ubuntu Mono, 11pt</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -976,8 +1395,11 @@
         hctI8v+WyUgVMbZa6QAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>jittr</value>
+    <value>jitterGang</value>
   </data>
   <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
     <value>toolTip1</value>
